@@ -26,6 +26,26 @@ public class Transacao extends Entidade {
         this.categoria = categoria;
     }
 
+    public Date getData() {
+        return data;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public Float getValor() {
+        return valor;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
     public void adicionarTransacao() {
         bancoEmMemoria.getTransacoes().add(this);
     }

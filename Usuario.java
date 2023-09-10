@@ -22,8 +22,28 @@ public class Usuario extends Entidade {
         this.emailRecuperacao = emailRecuperacao;
     }
 
-    public void cadastrarUsuario(Usuario usuario) {
-        bancoEmMemoria.getUsuarios().add(usuario);
+    public String getNome() {
+        return nome;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getEmailRecuperacao() {
+        return emailRecuperacao;
+    }
+
+    public void cadastrarUsuario() {
+        bancoEmMemoria.getUsuarios().add(this);
     }
 
     public Usuario consultarUsuario(Integer posicaoUsuario) {
