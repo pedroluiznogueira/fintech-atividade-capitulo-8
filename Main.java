@@ -1,72 +1,56 @@
+import java.util.Date;
 import java.util.List;
 
 public class Main {
 
     /*
-    * Dadas as classes Transacao e Usuario, na implementacao real de nossa aplicacao
-    * ambas seriam entidades representadas no banco de dados.
-    *
-    * Para efeito de exemplo, criamos a classe BancoEmMemoria para representar um
-    * banco de dado, mantendo os dados das transacoes e usuarios em listas.
-    *
-    * Dessa forma, ambas as classes utilizam esse mesmo "banco".
-    *
-    * Para implementacao de heranca, cada entidade sempre tera um ID, que pode ser definido
-    * na classe pai, Entidade, dessa forma todas as classes que a implementam carregarao esse ID.
-    * */
-    public static void main(String[] args) {
+     * Dadas as classes Transacao e Usuario, na implementacao real de nossa aplicacao
+     * ambas seriam entidades representadas no banco de dados.
+     *
+     * Para efeito de exemplo, criamos a classe BancoEmMemoria para representar um
+     * banco de dado, mantendo os dados das transacoes e usuarios em listas.
+     *
+     * Dessa forma, ambas as classes utilizam esse mesmo "banco".
+     *
+     * Para implementacao de heranca, cada entidade sempre tera um ID, que pode ser definido
+     * na classe pai, Entidade, dessa forma todas as classes que a implementam carregarao esse ID.
+     * */
+    public static void main(String... args) {
         BancoEmMemoria bancoEmMemoria = new BancoEmMemoria();
 
-        Transacao transacaoUm = new Transacao(bancoEmMemoria);
-        Transacao transacaoDois = new Transacao(bancoEmMemoria);
-        transacaoUm.adicionarTransacao(transacaoUm);
-        transacaoUm.adicionarTransacao(transacaoDois);
+        Date dataPrimeiraTransacao = new Date();
+        String descricaoPrimeiraTransacao = "Primeira transacao do sistema";
+        Float valorPrimeiraTransacao = 1.22F;
+        String tipoPrimeiraTransacao = "Cartao";
+        String categoriaPrimeiraTransacao = "Nacional";
+        Transacao primeiraTransacao = new Transacao(bancoEmMemoria,
+                dataPrimeiraTransacao,
+                descricaoPrimeiraTransacao,
+                valorPrimeiraTransacao,
+                tipoPrimeiraTransacao,
+                categoriaPrimeiraTransacao
+        );
+        primeiraTransacao.adicionarTransacao();
 
-        List<Transacao> transacoes = transacaoUm.listarTransacoes();
-        System.out.println("Lista de transacoes");
-        System.out.println(transacoes);
+        Date dataSegundaTransacao = new Date();
+        String descricaoSegundaTransacao = "Segunda transacao do sistema";
+        Float valorSegundaTransacao = 9.99F;
+        String tipoSegundaTransacao = "Pix";
+        String categoriaSegundaTransacao = "Internacional";
+        Transacao segundaTransacao = new Transacao(bancoEmMemoria,
+                dataSegundaTransacao,
+                descricaoSegundaTransacao,
+                valorSegundaTransacao,
+                tipoSegundaTransacao,
+                categoriaSegundaTransacao
+        );
+        segundaTransacao.adicionarTransacao();
 
-        Usuario usuarioUm = new Usuario(bancoEmMemoria);
-        Usuario usuarioDois = new Usuario(bancoEmMemoria);
-        usuarioUm.cadastrarUsuario(usuarioUm);
-        usuarioUm.cadastrarUsuario(usuarioDois);
-
-        Usuario usuarioUmConsultado = usuarioUm.consultarUsuario(0);
-        System.out.println("Usuario 1");
-        System.out.println(usuarioUmConsultado);
-
-        Usuario usuarioDoisConsultado = usuarioUm.consultarUsuario(1);
-        System.out.println("Usuario 2");
-        System.out.println(usuarioDoisConsultado);
-
-        usuarioUm.excluirUsuario(usuarioUm);
-
-        Usuario usuarioAposExcluir = usuarioUm.consultarUsuario(0);
-        System.out.println("Usuario apos excluir");
-        System.out.println(usuarioAposExcluir);
-
-        Usuario novoUsuario = new Usuario(bancoEmMemoria);
-        System.out.println("Novo usuario para substituir");
-        System.out.println(novoUsuario);
-        usuarioUm.alterarUsuario(0, novoUsuario);
-
-        Usuario usuarioSubstituido = usuarioUm.consultarUsuario(0);
-        System.out.println("Usuario substituido");
-        System.out.println(usuarioSubstituido);
-
-        int quantidadeDeEntidades = bancoEmMemoria.listarQuantidadeDeEntidades();
-        System.out.println("Quantidade de entidades");
-        System.out.println(quantidadeDeEntidades);
-
-        List<Entidade> entidades = bancoEmMemoria.listarEntidades();
-        entidades.forEach(entidade -> {
-            System.out.println("ID de cada entidade presente no banco");
-            System.out.println(entidade.getId());
-        });
-
-        Transacao novaTransacao = new Transacao(bancoEmMemoria);
-        novaTransacao.adicionarTransacao(novaTransacao);
-        System.out.println("ID da transacao adicionada");
-        System.out.println(novaTransacao.getId());
+        List<Transacao> primeiraListaDetransacoes = primeiraTransacao.listarTransacoes();
+        System.out.println("---Quantidade de transacoes encontradas no banco---");
+        System.out.printf("'%s' transacoes encontradas no banco de dados %n", primeiraListaDetransacoes.size());
+        System.out.println("---ID de cada transacao encontrada no banco---");
+        primeiraListaDetransacoes.forEach(transacao ->
+                System.out.printf("Transacao com ID: '%s' encontrada no banco %n", transacao.getId()));
     }
 }

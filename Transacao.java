@@ -1,14 +1,33 @@
+import java.util.Date;
 import java.util.List;
 
 public class Transacao extends Entidade {
     private final BancoEmMemoria bancoEmMemoria;
+    private final Date data;
+    private final String descricao;
+    private final Float valor;
+    private final String tipo;
+    private final String categoria;
 
-    public Transacao(BancoEmMemoria bancoEmMemoria) {
+
+    public Transacao(
+            BancoEmMemoria bancoEmMemoria,
+            Date data,
+            String descricao,
+            Float valor,
+            String tipo,
+            String categoria
+    ) {
         this.bancoEmMemoria = bancoEmMemoria;
+        this.data = data;
+        this.descricao = descricao;
+        this.valor = valor;
+        this.tipo = tipo;
+        this.categoria = categoria;
     }
 
-    public void adicionarTransacao(Transacao transacao) {
-        bancoEmMemoria.getTransacoes().add(transacao);
+    public void adicionarTransacao() {
+        bancoEmMemoria.getTransacoes().add(this);
     }
 
     public List<Transacao> listarTransacoes() {
