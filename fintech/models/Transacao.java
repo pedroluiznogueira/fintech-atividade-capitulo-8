@@ -4,10 +4,12 @@ import fintech.BancoEmMemoria;
 
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 public class Transacao extends Entidade {
     // TODO: implementar ID usuario
     private final BancoEmMemoria bancoEmMemoria;
+    private final UUID idUsuario;
     private final Date data;
     private final String descricao;
     private final Float valor;
@@ -17,18 +19,23 @@ public class Transacao extends Entidade {
 
     public Transacao(
             BancoEmMemoria bancoEmMemoria,
-            Date data,
+            UUID idUsuario, Date data,
             String descricao,
             Float valor,
             String tipo,
             String categoria
     ) {
         this.bancoEmMemoria = bancoEmMemoria;
+        this.idUsuario = idUsuario;
         this.data = data;
         this.descricao = descricao;
         this.valor = valor;
         this.tipo = tipo;
         this.categoria = categoria;
+    }
+
+    public UUID getIdUsuario() {
+        return idUsuario;
     }
 
     public Date getData() {

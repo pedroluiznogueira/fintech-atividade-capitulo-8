@@ -8,7 +8,7 @@ import java.util.List;
 public class Main {
 
     /*
-     * Dadas as classes fintech.models.Transacao e fintech.models.Usuario, na implementacao real de nossa aplicacao
+     * Dadas as classes Transacao e Usuario, na implementacao real de nossa aplicacao
      * ambas seriam entidades representadas no banco de dados.
      *
      * Para efeito de exemplo, criamos a classe fintech.BancoEmMemoria para representar um
@@ -17,54 +17,10 @@ public class Main {
      * Dessa forma, ambas as classes utilizam esse mesmo "banco".
      *
      * Para implementacao de heranca, cada entidade sempre tera um ID, que pode ser definido
-     * na classe pai, fintech.models.Entidade, dessa forma todas as classes que a implementam carregarao esse ID.
+     * na classe pai, Entidade, dessa forma todas as classes que a implementam carregarao esse ID.
      * */
     public static void main(String... args) {
         BancoEmMemoria bancoEmMemoria = new BancoEmMemoria();
-
-        Date dataPrimeiraTransacao = new Date();
-        String descricaoPrimeiraTransacao = "Primeira transacao do sistema";
-        Float valorPrimeiraTransacao = 1.22F;
-        String tipoPrimeiraTransacao = "Cartao";
-        String categoriaPrimeiraTransacao = "Nacional";
-        Transacao primeiraTransacao = new Transacao(bancoEmMemoria,
-                dataPrimeiraTransacao,
-                descricaoPrimeiraTransacao,
-                valorPrimeiraTransacao,
-                tipoPrimeiraTransacao,
-                categoriaPrimeiraTransacao
-        );
-        primeiraTransacao.adicionarTransacao();
-
-        Date dataSegundaTransacao = new Date();
-        String descricaoSegundaTransacao = "Segunda transacao do sistema";
-        Float valorSegundaTransacao = 9.99F;
-        String tipoSegundaTransacao = "Pix";
-        String categoriaSegundaTransacao = "Internacional";
-        Transacao segundaTransacao = new Transacao(bancoEmMemoria,
-                dataSegundaTransacao,
-                descricaoSegundaTransacao,
-                valorSegundaTransacao,
-                tipoSegundaTransacao,
-                categoriaSegundaTransacao
-        );
-        segundaTransacao.adicionarTransacao();
-
-        List<Transacao> primeiraListaDetransacoes = primeiraTransacao.listarTransacoes();
-        System.out.println(" ");
-        System.out.println("======Quantidade de transacoes encontradas no banco======");
-        System.out.printf("'%s' transacoes encontradas no banco de dados %n", primeiraListaDetransacoes.size());
-        System.out.println("======ID de cada transacao encontrada no banco======");
-        primeiraListaDetransacoes.forEach(transacao ->
-                System.out.printf("fintech.models.Transacao com ID: '%s' encontrada no banco %n", transacao.getId()));
-
-        System.out.println(" ");
-        System.out.println("======Dados da primeira transacao======");
-        System.out.printf("Data da primeira transacao: '%s' %n", primeiraTransacao.getData());
-        System.out.printf("Descricao da primeira transacao: '%s' %n", primeiraTransacao.getDescricao());
-        System.out.printf("Valor da primeira transacao: '%s' %n", primeiraTransacao.getValor());
-        System.out.printf("Tipo da primeira transacao: '%s' %n", primeiraTransacao.getTipo());
-        System.out.printf("Categoria da primeira transacao: '%s' %n", primeiraTransacao.getCategoria());
 
         String nomePrimeiroUsuario = "Joao";
         String cpfPrimeiroUsuario = "11111111111";
@@ -97,12 +53,12 @@ public class Main {
         System.out.println(" ");
         System.out.println("======Consultando o primeiro usuario no banco======");
         Usuario primeiroUsuarioEncontrado = primeiroUsuario.consultarUsuario(0);
-        System.out.printf("fintech.models.Usuario com ID: '%s' encontrado no banco %n", primeiroUsuarioEncontrado.getId());
+        System.out.printf("Usuario com ID: '%s' encontrado no banco %n", primeiroUsuarioEncontrado.getId());
 
         System.out.println(" ");
         System.out.println("======Consultando o segundo usuario no banco======");
         Usuario segundoUsuarioEncontrado = primeiroUsuario.consultarUsuario(1);
-        System.out.printf("fintech.models.Usuario com ID: '%s' encontrado no banco %n", segundoUsuarioEncontrado.getId());
+        System.out.printf("Usuario com ID: '%s' encontrado no banco %n", segundoUsuarioEncontrado.getId());
 
         Usuario segundoUsuarioPreAlteracao = segundoUsuario.consultarUsuario(1);
         System.out.println(" ");
@@ -129,5 +85,52 @@ public class Main {
         System.out.println("======Recuperando o primeiro usuario da lista apos excluir o primeiro usuario criado======");
         Usuario segundoUsuarioAposExclusaoDoPrimeiro = segundoUsuario.consultarUsuario(0);
         System.out.printf("Email de recuperacao do primeiro usuario da lista: '%s' %n", segundoUsuarioAposExclusaoDoPrimeiro.getEmailRecuperacao());
+
+        Date dataPrimeiraTransacao = new Date();
+        String descricaoPrimeiraTransacao = "Primeira transacao do sistema";
+        Float valorPrimeiraTransacao = 1.22F;
+        String tipoPrimeiraTransacao = "Cartao";
+        String categoriaPrimeiraTransacao = "Nacional";
+        Transacao primeiraTransacao = new Transacao(bancoEmMemoria,
+                primeiroUsuario.getId(),
+                dataPrimeiraTransacao,
+                descricaoPrimeiraTransacao,
+                valorPrimeiraTransacao,
+                tipoPrimeiraTransacao,
+                categoriaPrimeiraTransacao
+        );
+        primeiraTransacao.adicionarTransacao();
+
+        Date dataSegundaTransacao = new Date();
+        String descricaoSegundaTransacao = "Segunda transacao do sistema";
+        Float valorSegundaTransacao = 9.99F;
+        String tipoSegundaTransacao = "Pix";
+        String categoriaSegundaTransacao = "Internacional";
+        Transacao segundaTransacao = new Transacao(bancoEmMemoria,
+                segundoUsuario.getId(),
+                dataSegundaTransacao,
+                descricaoSegundaTransacao,
+                valorSegundaTransacao,
+                tipoSegundaTransacao,
+                categoriaSegundaTransacao
+        );
+        segundaTransacao.adicionarTransacao();
+
+        List<Transacao> primeiraListaDetransacoes = primeiraTransacao.listarTransacoes();
+        System.out.println(" ");
+        System.out.println("======Quantidade de transacoes encontradas no banco======");
+        System.out.printf("'%s' transacoes encontradas no banco de dados %n", primeiraListaDetransacoes.size());
+        System.out.println("======ID de cada transacao encontrada no banco======");
+        primeiraListaDetransacoes.forEach(transacao ->
+                System.out.printf("Transacao com ID: '%s' encontrada no banco %n", transacao.getId()));
+
+        System.out.println(" ");
+        System.out.println("======Dados da primeira transacao======");
+        System.out.printf("Primeira transacao pertence ao usuario com id: '%s' %n", primeiraTransacao.getIdUsuario());
+        System.out.printf("Data da primeira transacao: '%s' %n", primeiraTransacao.getData());
+        System.out.printf("Descricao da primeira transacao: '%s' %n", primeiraTransacao.getDescricao());
+        System.out.printf("Valor da primeira transacao: '%s' %n", primeiraTransacao.getValor());
+        System.out.printf("Tipo da primeira transacao: '%s' %n", primeiraTransacao.getTipo());
+        System.out.printf("Categoria da primeira transacao: '%s' %n", primeiraTransacao.getCategoria());
     }
 }

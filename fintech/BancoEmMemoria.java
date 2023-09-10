@@ -42,16 +42,4 @@ public class BancoEmMemoria {
     public List<Telefone> getTelefones() {
         return telefones;
     }
-
-    // TODO: utilizar esses metodos
-    public int listarQuantidadeDeEntidades() {
-        return usuarios.size() + transacoes.size();
-    }
-
-    public List<Entidade> listarEntidades() {
-        List<Entidade> entidades = new ArrayList<>();
-        entidades.addAll(usuarios);
-        entidades.addAll(transacoes);
-        return entidades;
-    }
 }
