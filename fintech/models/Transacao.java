@@ -1,7 +1,12 @@
+package fintech.models;
+
+import fintech.BancoEmMemoria;
+
 import java.util.Date;
 import java.util.List;
 
 public class Transacao extends Entidade {
+    // TODO: implementar ID usuario
     private final BancoEmMemoria bancoEmMemoria;
     private final Date data;
     private final String descricao;

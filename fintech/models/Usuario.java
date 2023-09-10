@@ -1,3 +1,7 @@
+package fintech.models;
+
+import fintech.BancoEmMemoria;
+
 public class Usuario extends Entidade {
     private final BancoEmMemoria bancoEmMemoria;
     private final String nome;

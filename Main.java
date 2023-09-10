@@ -1,19 +1,23 @@
+import fintech.BancoEmMemoria;
+import fintech.models.Transacao;
+import fintech.models.Usuario;
+
 import java.util.Date;
 import java.util.List;
 
 public class Main {
 
     /*
-     * Dadas as classes Transacao e Usuario, na implementacao real de nossa aplicacao
+     * Dadas as classes fintech.models.Transacao e fintech.models.Usuario, na implementacao real de nossa aplicacao
      * ambas seriam entidades representadas no banco de dados.
      *
-     * Para efeito de exemplo, criamos a classe BancoEmMemoria para representar um
+     * Para efeito de exemplo, criamos a classe fintech.BancoEmMemoria para representar um
      * banco de dado, mantendo os dados das transacoes e usuarios em listas.
      *
      * Dessa forma, ambas as classes utilizam esse mesmo "banco".
      *
      * Para implementacao de heranca, cada entidade sempre tera um ID, que pode ser definido
-     * na classe pai, Entidade, dessa forma todas as classes que a implementam carregarao esse ID.
+     * na classe pai, fintech.models.Entidade, dessa forma todas as classes que a implementam carregarao esse ID.
      * */
     public static void main(String... args) {
         BancoEmMemoria bancoEmMemoria = new BancoEmMemoria();
@@ -52,7 +56,7 @@ public class Main {
         System.out.printf("'%s' transacoes encontradas no banco de dados %n", primeiraListaDetransacoes.size());
         System.out.println("======ID de cada transacao encontrada no banco======");
         primeiraListaDetransacoes.forEach(transacao ->
-                System.out.printf("Transacao com ID: '%s' encontrada no banco %n", transacao.getId()));
+                System.out.printf("fintech.models.Transacao com ID: '%s' encontrada no banco %n", transacao.getId()));
 
         System.out.println(" ");
         System.out.println("======Dados da primeira transacao======");
@@ -93,12 +97,12 @@ public class Main {
         System.out.println(" ");
         System.out.println("======Consultando o primeiro usuario no banco======");
         Usuario primeiroUsuarioEncontrado = primeiroUsuario.consultarUsuario(0);
-        System.out.printf("Usuario com ID: '%s' encontrado no banco %n", primeiroUsuarioEncontrado.getId());
+        System.out.printf("fintech.models.Usuario com ID: '%s' encontrado no banco %n", primeiroUsuarioEncontrado.getId());
 
         System.out.println(" ");
         System.out.println("======Consultando o segundo usuario no banco======");
         Usuario segundoUsuarioEncontrado = primeiroUsuario.consultarUsuario(1);
-        System.out.printf("Usuario com ID: '%s' encontrado no banco %n", segundoUsuarioEncontrado.getId());
+        System.out.printf("fintech.models.Usuario com ID: '%s' encontrado no banco %n", segundoUsuarioEncontrado.getId());
 
         Usuario segundoUsuarioPreAlteracao = segundoUsuario.consultarUsuario(1);
         System.out.println(" ");
