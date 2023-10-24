@@ -1,8 +1,7 @@
 package fintech;
 
 import fintech.models.Conta;
-import fintech.models.Entidade;
-import fintech.models.Gasto;
+import fintech.models.Despesa;
 import fintech.models.Receita;
 import fintech.models.Telefone;
 import fintech.models.Transacao;
@@ -15,7 +14,7 @@ public class BancoEmMemoria {
     private final List<Usuario> usuarios = new ArrayList<>();
     private final List<Transacao> transacoes = new ArrayList<>();
     private final List<Conta> contas = new ArrayList<>();
-    private final List<Gasto> gastos = new ArrayList<>();
+    private final List<Despesa> despesas = new ArrayList<>();
     private final List<Receita> receitas = new ArrayList<>();
     private final List<Telefone> telefones = new ArrayList<>();
 
@@ -31,8 +30,8 @@ public class BancoEmMemoria {
         return contas;
     }
 
-    public List<Gasto> getGastos() {
-        return gastos;
+    public List<Despesa> getGastos() {
+        return despesas;
     }
 
     public List<Receita> getReceitas() {

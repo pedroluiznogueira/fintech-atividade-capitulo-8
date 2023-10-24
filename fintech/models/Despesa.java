@@ -4,14 +4,14 @@ import fintech.BancoEmMemoria;
 
 import java.util.UUID;
 
-public class Gasto extends Entidade {
+public class Despesa extends Entidade {
     private final BancoEmMemoria bancoEmMemoria;
     private final UUID idUsuario;
     private final String categoria;
     private final String descricao;
     private final Float valor;
 
-    public Gasto(
+    public Despesa(
             BancoEmMemoria bancoEmMemoria,
             UUID idUsuario,
             String categoria,
@@ -45,15 +45,15 @@ public class Gasto extends Entidade {
         bancoEmMemoria.getGastos().add(this);
     }
 
-    public void alterarGasto(Integer posicaoGasto, Gasto gasto) {
-        bancoEmMemoria.getGastos().set(posicaoGasto, gasto);
+    public void alterarGasto(Integer posicaoGasto, Despesa despesa) {
+        bancoEmMemoria.getGastos().set(posicaoGasto, despesa);
     }
 
     public void excluirGasto() {
         bancoEmMemoria.getGastos().remove(this);
     }
 
-    public Gasto consultarGasto() {
+    public Despesa consultarGasto() {
         return this;
     }
 }
