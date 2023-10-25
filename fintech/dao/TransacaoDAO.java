@@ -17,7 +17,7 @@ public class TransacaoDAO {
         PreparedStatement stmt = conexao.prepareStatement(sqlInsert);
 
         // Inserindo os valores nas mascaras do insert
-        stmt.setInt(1, 1);
+        stmt.setInt(1, 1); // TODO: por hora nao usando um Usuario real, dito que foi pedido para nao fazemos para a tabela de usuarios ainda
         stmt.setDate(2, new Date(System.currentTimeMillis()));
         stmt.setString(3,  transacao.getDescricao());
         stmt.setDouble(4, transacao.getValor());
