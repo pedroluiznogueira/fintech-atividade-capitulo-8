@@ -24,6 +24,7 @@ public class TransacaoDAO {
         stmt.setString(5, transacao.getTipo());
         stmt.setString(6, transacao.getCategoria());
 
+        // TODO: adicionar try catch para tabela inexistente ou erro inserindo
         stmt.executeUpdate();
         System.out.println("Record inserted successfully!");
     }
@@ -33,6 +34,7 @@ public class TransacaoDAO {
         String sqlSelect = "SELECT * FROM TRANSACOES";
         PreparedStatement stmt = conexao.prepareStatement(sqlSelect);
 
+        // TODO: adicionar try catch para tabela inexistente ou erro selecionando
         ResultSet resultSet = stmt.executeQuery();
         return resultSet;
     }
