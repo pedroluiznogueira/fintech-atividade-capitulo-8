@@ -19,7 +19,7 @@ public class TesteView {
                     "jdbc:oracle:thin:@localhost:1521:",
                     "mynewschema",
                     "mypassword");
-            System.out.println("Connected!");
+            System.out.println("Conectado ao Banco de Dados!");
 
             // Instanciando uma transacao
             Date dataPrimeiraTransacao = new Date();

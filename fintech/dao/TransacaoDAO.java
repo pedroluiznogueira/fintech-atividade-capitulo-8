@@ -11,7 +11,7 @@ import java.sql.SQLException;
 public class TransacaoDAO {
     public void insert(Connection conexao, Transacao transacao) {
         try {
-            // Preparando o sql insert
+            // Preparando o insert
             String sqlInsert = "INSERT INTO TRANSACOES " +
                     "(USUARIO_ID, DATA, DESCRICAO, VALOR, TIPO, CATEGORIA)" +
                     " VALUES (?, ?, ?, ?, ?, ?)";
@@ -36,7 +36,7 @@ public class TransacaoDAO {
     public ResultSet getAll(Connection conexao) {
         ResultSet resultSet = null;
         try {
-            // Preparando o sql all
+            // Preparando o select all
             String sqlSelect = "SELECT * FROM TRANSACOES";
             PreparedStatement stmt = conexao.prepareStatement(sqlSelect);
 
