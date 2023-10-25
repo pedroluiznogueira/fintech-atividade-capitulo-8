@@ -34,6 +34,22 @@ public class Transacao extends Entidade {
         this.categoria = categoria;
     }
 
+    public Transacao(
+            UUID idUsuario, Date data,
+            String descricao,
+            Float valor,
+            String tipo,
+            String categoria
+    ) {
+        this.bancoEmMemoria = null;
+        this.idUsuario = idUsuario;
+        this.data = data;
+        this.descricao = descricao;
+        this.valor = valor;
+        this.tipo = tipo;
+        this.categoria = categoria;
+    }
+
     public UUID getIdUsuario() {
         return idUsuario;
     }
