@@ -1,25 +1,28 @@
 import fintech.dao.TransacaoDAO;
 import fintech.models.Transacao;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Date;
 import java.util.UUID;
 
 public class TesteView {
 
     public static void main(String... args) {
         Connection conexao = null;
-        PreparedStatement stmt = null;
-        ResultSet resultSet = null;
 
         try {
-            // Opening database connection
+            // Abrindo a conexao com o banco de dados
             conexao = DriverManager.getConnection(
                     "jdbc:oracle:thin:@localhost:1521:",
                     "mynewschema",
                     "mypassword");
             System.out.println("Connected!");
 
-            java.util.Date dataPrimeiraTransacao = new java.util.Date();
+            // Instanciando uma transacao
+            Date dataPrimeiraTransacao = new Date();
             String descricaoPrimeiraTransacao = "Primeira transacao do sistema";
             Float valorPrimeiraTransacao = 1.22F;
             String tipoPrimeiraTransacao = "Cartao";
@@ -32,22 +35,17 @@ public class TesteView {
                     tipoPrimeiraTransacao,
                     categoriaPrimeiraTransacao
             );
+
+            // Instanciando classe responsavel por se comunicar com a tabela de transacoes
             TransacaoDAO transacaoDAO = new TransacaoDAO();
+
+            // Criando uma transacao
             transacaoDAO.insert(conexao, primeiraTransacao);
 
-            // Closing the PreparedStatement
-            if (stmt != null) {
-                stmt.close();
-            }
+            // Select em todas as transacoes
+            ResultSet resultSet = transacaoDAO.getAll(conexao);
 
-            // Preparing the SQL statement for selection
-            String sqlSelect = "SELECT * FROM TRANSACOES";
-            stmt = conexao.prepareStatement(sqlSelect);
-
-            // Executing the query
-            resultSet = stmt.executeQuery();
-
-            // Processing the results
+            // Processando as transacoes
             while (resultSet.next()) {
                 System.out.println("ID: " + resultSet.getInt("ID"));
                 System.out.println("USUARIO_ID: " + resultSet.getInt("USUARIO_ID"));
@@ -64,25 +62,7 @@ public class TesteView {
             exception.printStackTrace();
 
         } finally {
-            // Closing the ResultSet
-            if (resultSet != null) {
-                try {
-                    resultSet.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            // Closing the PreparedStatement
-            if (stmt != null) {
-                try {
-                    stmt.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            // Closing the database connection
+            // Fechando a conexao com o banco
             if (conexao != null) {
                 try {
                     conexao.close();
