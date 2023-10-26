@@ -4,12 +4,14 @@ import fintech.dao.InvestimentoDAO;
 import fintech.dao.ReceitaDAO;
 import fintech.dao.TelefoneDAO;
 import fintech.dao.TransacaoDAO;
+import fintech.dao.UsuarioDAO;
 import fintech.models.Conta;
 import fintech.models.Despesa;
 import fintech.models.Investimento;
 import fintech.models.Receita;
 import fintech.models.Telefone;
 import fintech.models.Transacao;
+import fintech.models.Usuario;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -30,6 +32,28 @@ public class TesteView {
                     "mynewschema",
                     "mypassword");
             System.out.println("Conectado ao Banco de Dados!");
+
+            System.out.println("-------USUARIOS-------");
+
+            // Instanciando um usuario
+            String nomeUsuario = "Joao";
+            String cpfUsuario = "11111111111";
+            String senhaUsuario = "senha_super_secreta";
+            String emailUsuario = "joao@hotmail.com";
+            String emailRecuperacaoUsuario = "oaoj@hotmail.com";
+            Usuario usuario = new Usuario(
+                    nomeUsuario,
+                    cpfUsuario,
+                    senhaUsuario,
+                    emailUsuario,
+                    emailRecuperacaoUsuario
+            );
+
+            // Instanciando classe responsavel por se comunicar com a tabela de usuarios
+            UsuarioDAO usuarioDAO = new UsuarioDAO();
+
+            // Criando um usuario
+            usuarioDAO.insert(conexao, usuario);
 
             System.out.println("-------TRANSACOES-------");
 

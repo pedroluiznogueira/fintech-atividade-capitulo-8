@@ -26,6 +26,21 @@ public class Usuario extends Entidade {
         this.emailRecuperacao = emailRecuperacao;
     }
 
+    public Usuario(
+            String nome,
+            String cpf,
+            String senha,
+            String email,
+            String emailRecuperacao
+    ) {
+        this.bancoEmMemoria = null;
+        this.nome = nome;
+        this.cpf = cpf;
+        this.senha = senha;
+        this.email = email;
+        this.emailRecuperacao = emailRecuperacao;
+    }
+
     public String getNome() {
         return nome;
     }
