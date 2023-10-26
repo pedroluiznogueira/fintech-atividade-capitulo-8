@@ -24,6 +24,19 @@ public class Receita extends Entidade {
         this.valor = valor;
     }
 
+    public Receita(
+            UUID idUsuario,
+            String tipo,
+            String descricao,
+            Float valor
+    ) {
+        this.bancoEmMemoria = null;
+        this.idUsuario = idUsuario;
+        this.tipo = tipo;
+        this.descricao = descricao;
+        this.valor = valor;
+    }
+
     public UUID getIdUsuario() {
         return idUsuario;
     }

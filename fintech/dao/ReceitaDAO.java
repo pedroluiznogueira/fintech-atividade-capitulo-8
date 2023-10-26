@@ -1,34 +1,31 @@
 package fintech.dao;
 
-import fintech.models.Transacao;
+import fintech.models.Receita;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class TransacaoDAO {
-    public void insert(Connection conexao, Transacao transacao) {
+public class ReceitaDAO {
+    public void insert(Connection conexao, Receita receita) {
         try {
             // Preparando o insert
-            String sqlInsert = "INSERT INTO TRANSACOES " +
-                    "(USUARIO_ID, DATA, DESCRICAO, VALOR, TIPO, CATEGORIA)" +
-                    " VALUES (?, ?, ?, ?, ?, ?)";
+            String sqlInsert = "INSERT INTO RECEITAS " +
+                    "(USUARIO_ID, TIPO, DESCRICAO, VALOR)" +
+                    " VALUES (?, ?, ?, ?)";
             PreparedStatement stmt = conexao.prepareStatement(sqlInsert);
 
             // Inserindo os valores nas mascaras do insert
             stmt.setInt(1, 1); // TODO: por hora nao usando um Usuario real, dito que foi pedido para nao fazemos para a tabela de usuarios ainda
-            stmt.setDate(2, new Date(System.currentTimeMillis()));
-            stmt.setString(3,  transacao.getDescricao());
-            stmt.setDouble(4, transacao.getValor());
-            stmt.setString(5, transacao.getTipo());
-            stmt.setString(6, transacao.getCategoria());
+            stmt.setString(2, receita.getTipo());
+            stmt.setString(3, receita.getDescricao());
+            stmt.setDouble(4, receita.getValor());
 
             stmt.executeUpdate();
-            System.out.println("Transacao inserida com sucesso");
+            System.out.println("Receita inserida com sucesso!");
         } catch (SQLException exception) {
-            System.err.println("Algo deu errado ao tentar inserir uma transacao");
+            System.err.println("Algo deu errado ao tentar inserir uma receita");
             exception.printStackTrace();
         }
     }
@@ -37,12 +34,12 @@ public class TransacaoDAO {
         ResultSet resultSet = null;
         try {
             // Preparando o select all
-            String sqlSelect = "SELECT * FROM TRANSACOES";
+            String sqlSelect = "SELECT * FROM RECEITAS";
             PreparedStatement stmt = conexao.prepareStatement(sqlSelect);
 
             resultSet = stmt.executeQuery();
         } catch (SQLException exception) {
-            System.err.println("Algo deu errado ao tentar selecionar todas as transacoes");
+            System.err.println("Algo deu errado ao tentar selecionar todas as receitas");
             exception.printStackTrace();
         }
         return resultSet;

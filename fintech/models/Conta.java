@@ -21,6 +21,17 @@ public class Conta extends Entidade {
         this.saldo = saldo;
     }
 
+    public Conta(
+            UUID idUsuario,
+            String nome,
+            Float saldo
+    ) {
+        this.bancoEmMemoria = null;
+        this.idUsuario = idUsuario;
+        this.nome = nome;
+        this.saldo = saldo;
+    }
+
     public UUID getIdUsuario() {
         return idUsuario;
     }

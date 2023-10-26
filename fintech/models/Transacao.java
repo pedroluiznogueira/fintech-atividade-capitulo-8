@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.UUID;
 
 public class Transacao extends Entidade {
-    // TODO: implementar ID usuario
     private final BancoEmMemoria bancoEmMemoria;
     private final UUID idUsuario;
     private final Date data;

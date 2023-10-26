@@ -19,6 +19,15 @@ public class Telefone extends Entidade {
         this.telefone = telefone;
     }
 
+    public Telefone(
+            UUID idUsuario,
+            String telefone
+    ) {
+        this.bancoEmMemoria = null;
+        this.idUsuario = idUsuario;
+        this.telefone = telefone;
+    }
+
     public UUID getIdUsuario() {
         return idUsuario;
     }
