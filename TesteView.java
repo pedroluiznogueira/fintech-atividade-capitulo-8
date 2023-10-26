@@ -29,8 +29,8 @@ public class TesteView {
             // Abrindo a conexao com o banco de dados
             conexao = DriverManager.getConnection(
                     "jdbc:oracle:thin:@localhost:1521:",
-                    "mynewschema",
-                    "mypassword");
+                    "fintech",
+                    "mysecretpassword");
             System.out.println("Conectado ao Banco de Dados!");
 
             System.out.println("-------USUARIOS-------");
