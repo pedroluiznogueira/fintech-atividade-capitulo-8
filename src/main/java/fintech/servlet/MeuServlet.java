@@ -1,5 +1,6 @@
 package fintech.servlet;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,15 +29,15 @@ public class MeuServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        // Extracting form data
-        String login = req.getParameter("login");
-        String senha = req.getParameter("senha");
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        // Retrieve login name from the form
+        String loginName = req.getParameter("login");
 
-        // Printing the data to the console
-        System.out.println("Login: " + login);
-        System.out.println("Senha: " + senha);
+        // Set the login name as an attribute to be used in JSP
+        req.setAttribute("loginName", loginName);
 
-        resp.getWriter().println("Received data: Login=" + login + ", Senha=" + senha);
+        // Forward the request to the greeting JSP page
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/greeting.jsp");
+        dispatcher.forward(req, resp);
     }
 }
