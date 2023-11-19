@@ -20,6 +20,11 @@ public class UsuarioServlet extends HttpServlet {
     }
 
     @Override
+    public void destroy() {
+        System.out.println("UsuarioServlet destroy...");
+    }
+
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String nome = req.getParameter("nome");
         String cpf = req.getParameter("cpf");
