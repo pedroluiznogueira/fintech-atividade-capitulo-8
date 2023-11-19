@@ -3,6 +3,8 @@ package fintech.controller;
 import fintech.dao.UsuarioDAO;
 import fintech.models.Usuario;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -25,7 +27,7 @@ public class UsuarioServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         String nome = req.getParameter("nome");
         String cpf = req.getParameter("cpf");
         String senha = req.getParameter("senha");
@@ -34,9 +36,13 @@ public class UsuarioServlet extends HttpServlet {
 
         Usuario usuario = new Usuario(nome, cpf, senha, email, emailRecuperacao);
 
-        usuarioDAO.insert(usuario);
+        boolean isCreated = usuarioDAO.insert(usuario);
 
-        // @TODO: delegar para um jsp de cadastro feito com sucesso
-        resp.getWriter().println("Usuario cadastrado com sucesso");
+        if (isCreated) {
+            req.setAttribute("success", true);
+        }
+
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/pages/cadastro.jsp");
+        requestDispatcher.forward(req, resp);
     }
 }

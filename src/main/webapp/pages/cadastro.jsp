@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -18,6 +19,12 @@
 
     <main>
         <div class="container text-center margin-top-g">
+            <c:if test="${not empty requestScope.success}">
+                <div class="alert alert-success" role="alert">
+                    Usuario criado com sucesso
+                </div>
+            </c:if>
+
             <p class="fs-1 fw-bold">Cadastro</p>
             <div class="form-center-desk">
                 <form action="/usuarios" name="cadastro" id="cadastro" method="post" class="form-width ">

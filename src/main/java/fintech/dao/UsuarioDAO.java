@@ -9,7 +9,7 @@ import java.sql.SQLException;
 public class UsuarioDAO {
     private Connection conexao;
 
-    public void insert(Usuario usuario) {
+    public boolean insert(Usuario usuario) {
         try {
             conexao = ConnectionManager
                     .getInstance()
@@ -30,9 +30,13 @@ public class UsuarioDAO {
 
             stmt.executeUpdate();
             System.out.println("Usuario inserido com sucesso!");
+
+            return true;
         } catch (SQLException exception) {
             System.err.println("Algo deu errado ao tentar inserir um usuario");
             exception.printStackTrace();
+
+            return false;
         }
     }
 }
