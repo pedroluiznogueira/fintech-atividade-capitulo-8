@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,7 +19,7 @@
         <div class="container text-center margin-top-g">
             <p class="fs-1 fw-bold">Cadastro</p>
             <div class="form-center-desk">
-                <form action="" name="cadastro" id="cadastro" method="post" class="form-width ">
+                <form action="/usuarios" name="cadastro" id="cadastro" method="post" class="form-width ">
                     <input for="cpf" placeholder="Digite seu CPF" type="number" class=" form-number form-control my-4 form-width form-login" min="11111111111" max="99999999999" autofocus required>
                     <input for="nome" placeholder="Digite seu Nome" type="text" class="form-control my-4 form-width form-login" minlength="5" required>
                     <input for="senha" placeholder="Digite sua Senha" type="password" class="form-control my-4 form-width form-login" minlength="6" maxlength="15" required>
