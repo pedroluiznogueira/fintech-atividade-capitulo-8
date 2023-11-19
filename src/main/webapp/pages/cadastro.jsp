@@ -25,6 +25,8 @@
                     <input name="nome" placeholder="Digite seu Nome" type="text" class="form-control my-4 form-width form-login" minlength="5" required>
                     <input name="senha" placeholder="Digite sua Senha" type="password" class="form-control my-4 form-width form-login" minlength="6" maxlength="15" required>
                     <input name="confimacaoSenha" placeholder="Confirme sua Senha" type="password" class="form-control my-4 form-width form-login" minlength="6" maxlength="15" required>
+                    <input name="email" placeholder="Digite seu Email" type="email" class="form-control my-4 form-width form-login" required>
+                    <input name="emailRecuperacao" placeholder="Digite seu Email de Recuperacao" type="email" class="form-control my-4 form-width form-login" required>
                     <input type="submit" value="Registre-se" class="btn fw-bold py-2 px-5 btn-bg">
                 </form>
             </div>
