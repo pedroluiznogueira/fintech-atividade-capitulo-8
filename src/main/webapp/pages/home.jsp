@@ -38,9 +38,7 @@
                     <div class="d-flex mb-3 avatar">
                         <img src="../image/avatar.svg">
                         <p class="m-2 text-name">
-                            Olá 
-                            <br>
-                            Eduardo
+                            Olá
                         </p>
                     </div>
                     <div class="saldo">
