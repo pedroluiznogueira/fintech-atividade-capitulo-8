@@ -4,6 +4,7 @@ import fintech.models.Usuario;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UsuarioDAO {
@@ -38,5 +39,26 @@ public class UsuarioDAO {
 
             return false;
         }
+    }
+
+    public ResultSet getByCpf(String cpf) {
+        ResultSet resultSet = null;
+        try {
+            conexao = ConnectionManager
+                    .getInstance()
+                    .getConnection();
+
+            // Preparando o select all
+            String sqlSelect = "SELECT * FROM USUARIOS WHERE CPF = ?";
+            PreparedStatement stmt = conexao.prepareStatement(sqlSelect);
+
+            stmt.setString(1, cpf);
+
+            resultSet = stmt.executeQuery();
+        } catch (SQLException exception) {
+            System.err.println("Algo deu errado ao tentar selecionar todas as contas");
+            exception.printStackTrace();
+        }
+        return resultSet;
     }
 }

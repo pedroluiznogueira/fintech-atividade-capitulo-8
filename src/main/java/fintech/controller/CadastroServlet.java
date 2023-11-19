@@ -18,12 +18,12 @@ public class CadastroServlet extends HttpServlet {
     @Override
     public void init() {
         usuarioDAO = new UsuarioDAO();
-        System.out.println("UsuarioServlet init...");
+        System.out.println("CadastroServlet init...");
     }
 
     @Override
     public void destroy() {
-        System.out.println("UsuarioServlet destroy...");
+        System.out.println("CadastroServlet destroy...");
     }
 
     @Override

@@ -11,7 +11,7 @@
 </head>
 <body>
     <header class="container-fluid d-flex justify-content-center py-1">
-        <a href="login.html">
+        <a href="login.jsp">
             <img src="../image/back.svg" alt="Voltar" class="position-absolute start-0 top-0 mt-2 ms-3">
         </a>
         <h1 class="fs-3 fw-bold">FINTECH</h1>
