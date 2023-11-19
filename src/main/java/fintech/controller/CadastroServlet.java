@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/usuarios")
-public class UsuarioServlet extends HttpServlet {
+@WebServlet("/usuarios/cadastro")
+public class CadastroServlet extends HttpServlet {
     private UsuarioDAO usuarioDAO;
 
     @Override

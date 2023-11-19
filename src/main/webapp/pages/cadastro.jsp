@@ -35,7 +35,7 @@
 
             <p class="fs-1 fw-bold">Cadastro</p>
             <div class="form-center-desk">
-                <form action="/usuarios" name="cadastro" id="cadastro" method="post" class="form-width ">
+                <form action="/usuarios/cadastro" name="cadastro" id="cadastro" method="post" class="form-width ">
                     <input name="cpf" placeholder="Digite seu CPF" type="number" class=" form-number form-control my-4 form-width form-login" min="11111111111" max="99999999999" autofocus required>
                     <input name="nome" placeholder="Digite seu Nome" type="text" class="form-control my-4 form-width form-login" minlength="5" required>
                     <input name="senha" placeholder="Digite sua Senha" type="password" class="form-control my-4 form-width form-login" minlength="6" maxlength="15" required>
