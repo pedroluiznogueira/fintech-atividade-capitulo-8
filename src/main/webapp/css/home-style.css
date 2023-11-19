@@ -89,6 +89,9 @@ h2{
     background-color: #D8DEC3;
     color: black;
 }
+.mostrar{
+    display: none;
+}
 
 @media(min-width: 680px){
     .div-saldo{
@@ -112,9 +115,5 @@ h2{
     }
     .text-name{
         font-size: 22px;
-    }
-    .extrato{
-        width: 25%;
-        justify-content: end;
     }
 }

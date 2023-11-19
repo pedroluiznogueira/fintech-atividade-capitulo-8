@@ -25,3 +25,12 @@ slider.addEventListener('mousemove', e => {
   const walk = (x - startX) * SCROLL_SPEED;
   slider.scrollLeft = scrollLeft - walk;
 });
+
+function mostrarDiv(id) {
+  let divs = document.querySelectorAll('.mostrar');
+  for (let i = 0; i < divs.length; i++) {
+      divs[i].style.display = 'none';
+  }
+  let div = document.querySelector(id);
+  div.style.display = 'block';
+}
