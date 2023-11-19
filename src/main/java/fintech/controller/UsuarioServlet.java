@@ -40,6 +40,8 @@ public class UsuarioServlet extends HttpServlet {
 
         if (isCreated) {
             req.setAttribute("success", true);
+        } else {
+            req.setAttribute("success", false);
         }
 
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("/pages/cadastro.jsp");

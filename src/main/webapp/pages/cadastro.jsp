@@ -19,9 +19,17 @@
 
     <main>
         <div class="container text-center margin-top-g">
-            <c:if test="${not empty requestScope.success}">
+            <!-- Mensagem de sucesso -->
+            <c:if test="${not empty requestScope.success and requestScope.success eq true}">
                 <div class="alert alert-success" role="alert">
                     Usuario criado com sucesso
+                </div>
+            </c:if>
+
+            <!-- Mensagem de erro -->
+            <c:if test="${not empty requestScope.success and requestScope.success eq false}">
+                <div class="alert alert-danger" role="alert">
+                    Dados inválidos
                 </div>
             </c:if>
 
