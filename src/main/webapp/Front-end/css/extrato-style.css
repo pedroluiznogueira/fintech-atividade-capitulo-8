@@ -1,0 +1,56 @@
+*{
+    box-sizing: border-box;
+}
+header{
+    height: 50px;
+}
+header div img{
+    max-width: 20px;
+}
+body{
+    background-color: white;
+}
+.center{
+    margin: 0 auto;
+}
+.background-color-blue{
+    background-color: #12122B;
+}
+.extrato{
+    padding: 10px 0;
+    background-color: #5E5E5E;
+    border-radius: 8px;
+}
+.extrato-hr{
+    border: none;
+    border-top: solid 3px white;
+    margin: 10px 5px;
+}
+.extrato-info{
+    padding: 8px;
+}
+.hr{
+    border-bottom: solid 2px ;
+}
+.extrato-data{
+    font-size: 12px;
+}
+.extrato-info-principal img{
+    min-width: 80px;
+}
+.extrato-local{
+    font-size: 16px;
+    font-weight: 700;
+}
+.extrato-valor{
+    font-size: 16px;
+    font-weight: 700;
+}
+.extrato-detalhes{
+    font-size: 10px;
+    text-decoration: underline;
+}
+
+@media(min-width: 574px){
+    
+}
