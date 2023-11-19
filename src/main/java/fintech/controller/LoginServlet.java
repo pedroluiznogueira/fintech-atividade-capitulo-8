@@ -42,6 +42,8 @@ public class LoginServlet extends HttpServlet {
 
                 if (senhaExistente.equals(senhaInserida)) {
                     req.setAttribute("success", true);
+                    resp.sendRedirect(req.getContextPath() + "/home.jsp");
+                    return;
                 } else {
                     req.setAttribute("success", false);
                 }
