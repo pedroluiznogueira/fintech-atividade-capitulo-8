@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/menu-style.css">
-    <link rel="stylesheet" href="css/index-style.css">
-    <link rel="stylesheet" href="css/home-style.css">
+    <link rel="stylesheet" href="../css/menu-style.css">
+    <link rel="stylesheet" href="../css/index-style.css">
+    <link rel="stylesheet" href="../css/home-style.css">
     <title>Fintech | Login</title>
 </head>
 <body>
@@ -15,8 +15,8 @@
             <h1 class="fs-3 fw-bold">FINTECH</h1>
         </div>
         <div class="d-flex">
-            <img src="image/reload.svg" class="mx-4" onclick="reloadPage()" style="cursor: pointer">
-            <img src="image/config.svg" style="cursor: pointer">
+            <img src="../image/reload.svg" class="mx-4" onclick="reloadPage()" style="cursor: pointer">
+            <img src="../image/config.svg" style="cursor: pointer">
         </div>
     </header>
     <main>
@@ -36,7 +36,7 @@
             <div class="px-2">
                 <div class="background-color-blue my-2 p-3 rounded-2 shadow-lg div-saldo">
                     <div class="d-flex mb-3 avatar">
-                        <img src="image/avatar.svg">
+                        <img src="../image/avatar.svg">
                         <p class="m-2 text-name">
                             Olá 
                             <br>
@@ -91,7 +91,7 @@
             </div>
         </div>
     </main>
-    <script src="js/main.js"></script>
-    <script src="js/home.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/home.js"></script>
 </body>
 </html>
