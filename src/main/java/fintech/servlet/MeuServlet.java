@@ -26,4 +26,17 @@ public class MeuServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.getWriter().write("Hello world");
     }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        // Extracting form data
+        String login = req.getParameter("login");
+        String senha = req.getParameter("senha");
+
+        // Printing the data to the console
+        System.out.println("Login: " + login);
+        System.out.println("Senha: " + senha);
+
+        resp.getWriter().println("Received data: Login=" + login + ", Senha=" + senha);
+    }
 }
