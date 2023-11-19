@@ -15,6 +15,7 @@
         </a>
         <h1 class="fs-3 fw-bold">FINTECH</h1>
     </header>
+
     <main>
         <div class="container text-center margin-top-g">
             <p class="fs-1 fw-bold">Cadastro</p>

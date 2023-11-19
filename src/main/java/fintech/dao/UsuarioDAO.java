@@ -6,14 +6,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-/*
- * Implementando o insert de usuario para poder ter um usuario por padrao no banco de dados.
- * Do contrario nao teriamos uma FK para ser referenciada nas tabelas que tem relacionamento
- * com a tabela de usuarios.
- * */
 public class UsuarioDAO {
-    public void insert(Connection conexao, Usuario usuario) {
+    private Connection conexao;
+
+    public void insert(Usuario usuario) {
         try {
+            conexao = ConnectionManager
+                    .getInstance()
+                    .getConnection();
+
             // Preparando o insert
             String sqlInsert = "INSERT INTO USUARIOS " +
                     "(NOME, CPF, SENHA, EMAIL, EMAIL_RECUPERACAO)" +
