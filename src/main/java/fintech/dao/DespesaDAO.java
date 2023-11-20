@@ -33,6 +33,34 @@ public class DespesaDAO {
         }
     }
 
+    public boolean insert(Despesa despesa) {
+        try {
+            conexao = ConnectionManager
+                    .getInstance()
+                    .getConnection();
+
+            // Preparando o insert
+            String sqlInsert = "INSERT INTO DESPESAS" +
+                    "(USUARIO_ID, CATEGORIA, DESCRICAO, VALOR)" +
+                    " VALUES (?, ?, ?, ?)";
+            PreparedStatement stmt = conexao.prepareStatement(sqlInsert);
+
+            // Inserindo os valores nas mascaras do insert
+            stmt.setInt(1, despesa.getIdUsuario());
+            stmt.setString(2, despesa.getCategoria());
+            stmt.setString(3,  despesa.getDescricao());
+            stmt.setDouble(4, despesa.getValor());
+
+            stmt.executeUpdate();
+            System.out.println("Gasto inserido com sucesso");
+            return true;
+        } catch (SQLException exception) {
+            System.err.println("Algo deu errado ao tentar inserir um gasto");
+            exception.printStackTrace();
+            return false;
+        }
+    }
+
     public ResultSet getAll(Connection conexao) {
         ResultSet resultSet = null;
         try {

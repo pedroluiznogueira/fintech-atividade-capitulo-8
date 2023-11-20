@@ -5,7 +5,10 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import fintech.controller.utils.HttpSessionUtils;
 import fintech.dao.DespesaDAO;
 import fintech.dao.UsuarioDAO;
+import fintech.models.Despesa;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -28,6 +31,30 @@ public class DespesaServlet extends HttpServlet {
     @Override
     public void destroy() {
         System.out.println("DespesaServlet destroy...");
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int idUsuario = HttpSessionUtils.getUsuarioIdUsingHttpSessionCpf(req, usuarioDAO);
+        String categoriaDespesa = req.getParameter("categoria-gasto");
+        String descricaoDespesa = req.getParameter("descricao-gasto");
+        Float valorDespesa = Float.valueOf(req.getParameter("valor-gasto"));
+
+        Despesa despesa = new Despesa(idUsuario,
+                categoriaDespesa,
+                descricaoDespesa,
+                valorDespesa);
+
+        boolean isCreated = despesaDAO.insert(despesa);
+
+        if (isCreated) {
+            req.setAttribute("success", true);
+        } else {
+            req.setAttribute("success", false);
+        }
+
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/pages/cadastrar-gasto.jsp");
+        requestDispatcher.forward(req, resp);
     }
 
     @Override
