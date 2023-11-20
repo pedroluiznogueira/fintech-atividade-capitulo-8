@@ -40,13 +40,13 @@ public class DespesaDAO {
                     .getConnection();
 
             // Preparando o insert
-            String sqlInsert = "INSERT INTO INVESTIMENTOS " +
+            String sqlInsert = "INSERT INTO DESPESAS" +
                     "(USUARIO_ID, CATEGORIA, DESCRICAO, VALOR)" +
-                    " VALUES (?, ?, ?, ?, ?, ?)";
+                    " VALUES (?, ?, ?, ?)";
             PreparedStatement stmt = conexao.prepareStatement(sqlInsert);
 
             // Inserindo os valores nas mascaras do insert
-            stmt.setInt(1, 1); // TODO: por hora nao usando um Usuario real, dito que foi pedido para nao fazemos para a tabela de usuarios ainda
+            stmt.setInt(1, despesa.getIdUsuario());
             stmt.setString(2, despesa.getCategoria());
             stmt.setString(3,  despesa.getDescricao());
             stmt.setDouble(4, despesa.getValor());

@@ -35,11 +35,13 @@ public class DespesaServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String tipoDespesa = req.getParameter("tipo-gasto");
+        int idUsuario = HttpSessionUtils.getUsuarioIdUsingHttpSessionCpf(req, usuarioDAO);
+        String categoriaDespesa = req.getParameter("categoria-gasto");
         String descricaoDespesa = req.getParameter("descricao-gasto");
         Float valorDespesa = Float.valueOf(req.getParameter("valor-gasto"));
 
-        Despesa despesa = new Despesa(tipoDespesa,
+        Despesa despesa = new Despesa(idUsuario,
+                categoriaDespesa,
                 descricaoDespesa,
                 valorDespesa);
 
