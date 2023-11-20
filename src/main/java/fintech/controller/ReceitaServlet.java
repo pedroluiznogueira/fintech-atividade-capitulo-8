@@ -35,10 +35,10 @@ public class ReceitaServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int idUsuario = HttpSessionUtils.getUsuarioIdUsingHttpSessionCpf(req, usuarioDAO);
         String tipoRecebimento = req.getParameter("tipo-recebimento");
         String descricaoRecebimento = req.getParameter("descricao-recebimento");
         Float valorRecebimento = Float.valueOf(req.getParameter("valor-recebimento"));
-        int idUsuario = 1;
 
         Receita receita = new Receita(idUsuario,
                 tipoRecebimento,
