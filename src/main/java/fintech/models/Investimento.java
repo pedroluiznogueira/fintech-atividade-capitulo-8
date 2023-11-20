@@ -47,6 +47,21 @@ public class Investimento {
         this.retornoEstimado = retornoEstimado;
     }
 
+    public Investimento(
+            String tipo,
+            String descricao,
+            Float valorInvestido,
+            Date dataInvestimento,
+            Float retornoEstimado) {
+        this.bancoEmMemoria = null;
+        this.idUsuario = null;
+        this.tipo = tipo;
+        this.descricao = descricao;
+        this.valorInvestido = valorInvestido;
+        this.dataInvestimento = dataInvestimento;
+        this.retornoEstimado = retornoEstimado;
+    }
+
     public UUID getIdUsuario() {
         return idUsuario;
     }
