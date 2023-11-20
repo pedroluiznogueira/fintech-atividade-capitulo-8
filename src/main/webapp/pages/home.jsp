@@ -77,7 +77,7 @@
                         <h4 style="color: black;">Total de Investimentos</h4>
                         <!-- DASHBOARD DE CADA MENU ESCOLHIDO -->
                         <div class="d-flex py-3 extrato">
-                            <a href="extrato-investimento.html">
+                            <a href="extrato-investimento.jsp">
                                 <button class="btn px-4 button-extrato">Extrato dos Investimentos</button>
                             </a>
                         </div>
@@ -86,7 +86,7 @@
                         <h4 style="color: black;"style="color: black;">Total de Recebimentos</h4>
                         <!-- DASHBOARD DE CADA MENU ESCOLHIDO -->
                         <div class="d-flex py-3 extrato">
-                            <a href="extrato-recebimento.html">
+                            <a href="extrato-recebimento.jsp">
                                 <button class="btn px-4 button-extrato">Extrato dos Recebimentos</button>
                             </a>
                         </div>
@@ -95,7 +95,7 @@
                         <h4 style="color: black;">Total de Gastos</h4>
                         <!-- DASHBOARD DE CADA MENU ESCOLHIDO -->
                         <div class="d-flex py-3 extrato">
-                            <a href="extrato-gasto.html">
+                            <a href="extrato-gasto.jsp">
                                 <button class="btn px-4 button-extrato">Extrato dos Gastos</button>
                             </a>
                         </div>
