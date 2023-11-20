@@ -49,7 +49,7 @@ function fetchDataAndDisplay(url, elementId, label) {
     }
   };
 
-  xhr.open('GET', url, true);
+  xhr.open('GET', url + '?type=count', true);
   xhr.send();
 }
 

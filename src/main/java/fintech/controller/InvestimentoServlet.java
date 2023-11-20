@@ -2,7 +2,9 @@ package fintech.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import fintech.controller.utils.HttpSessionUtils;
 import fintech.dao.InvestimentoDAO;
+import fintech.dao.UsuarioDAO;
 import fintech.models.Investimento;
 
 import javax.servlet.RequestDispatcher;
@@ -14,14 +16,19 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet("/investimentos")
 public class InvestimentoServlet extends HttpServlet {
     private InvestimentoDAO investimentoDAO;
+    private UsuarioDAO usuarioDAO;
 
     @Override
     public void init() {
         investimentoDAO = new InvestimentoDAO();
+        usuarioDAO = new UsuarioDAO();
         System.out.println("InvestimentoServlet init...");
     }
 
@@ -32,20 +39,21 @@ public class InvestimentoServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int idUsuario = HttpSessionUtils.getUsuarioIdUsingHttpSessionCpf(req, usuarioDAO);
         String tipoInvestimento = req.getParameter("tipo-investimento");
         String descricaoInvestimento = req.getParameter("descricao-investimento");
         Float valorInvestimento = Float.valueOf(req.getParameter("valor-investimento"));
         Date dataInvestimento = Date.valueOf(req.getParameter("data-investimento"));
         Float valorRetorno = Float.valueOf(req.getParameter("valor-retorno"));
 
-        Investimento investimento = new Investimento(tipoInvestimento,
+        Investimento investimento = new Investimento(idUsuario,
+                tipoInvestimento,
                 descricaoInvestimento,
                 valorInvestimento,
                 dataInvestimento,
                 valorRetorno);
 
         boolean isCreated = investimentoDAO.insert(investimento);
-
         if (isCreated) {
             req.setAttribute("success", true);
         } else {
@@ -58,9 +66,46 @@ public class InvestimentoServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        // @TODO: pegar do usuario buscado apartir do cpf no HttpSession
-        int idUsuario = 1;
+        int idUsuario = HttpSessionUtils.getUsuarioIdUsingHttpSessionCpf(req, usuarioDAO);
 
+        String typeParam = req.getParameter("type");
+        if ("count".equals(typeParam)) {
+            getQuantidadeDeInvestimentos(resp, idUsuario);
+        } else {
+            getAllInvestimentos(resp, idUsuario);
+        }
+    }
+
+    private void getAllInvestimentos(HttpServletResponse resp, int idUsuario) throws IOException {
+        ResultSet investimentosResultSet = investimentoDAO.getInvestimentos(idUsuario);
+        List<Investimento> investimentosList = new ArrayList<>();
+
+        try {
+            while (investimentosResultSet.next()) {
+                Investimento investimento = new Investimento(
+                        idUsuario,
+                        investimentosResultSet.getString("tipo"),
+                        investimentosResultSet.getString("descricao"),
+                        investimentosResultSet.getFloat("valor_investido"),
+                        investimentosResultSet.getDate("data_investimento"),
+                        investimentosResultSet.getFloat("retorno_estimado")
+                );
+                investimentosList.add(investimento);
+            }
+
+            ObjectMapper objectMapper = new ObjectMapper();
+            String jsonString = objectMapper.writeValueAsString(investimentosList);
+
+            resp.setContentType("application/json");
+            resp.getWriter().write(jsonString);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Internal Server Error");
+        }
+    }
+
+    private void getQuantidadeDeInvestimentos(HttpServletResponse resp, int idUsuario) throws IOException {
         ResultSet getAllInvestimentosResultSet = investimentoDAO.getQuantidadeDeInvestimentos(idUsuario);
 
         ObjectMapper objectMapper = new ObjectMapper();
