@@ -70,55 +70,61 @@ public class InvestimentoServlet extends HttpServlet {
         int idUsuario = HttpSessionUtils.getUsuarioIdUsingHttpSessionCpf(req, usuarioDAO);
 
         String typeParam = req.getParameter("type");
-
         if ("count".equals(typeParam)) {
-            ResultSet getAllInvestimentosResultSet = investimentoDAO.getQuantidadeDeInvestimentos(idUsuario);
+            getQuantidadeDeInvestimentos(resp, idUsuario);
+        } else {
+            getAllInvestimentos(resp, idUsuario);
+        }
+    }
+
+    private void getAllInvestimentos(HttpServletResponse resp, int idUsuario) throws IOException {
+        ResultSet investimentosResultSet = investimentoDAO.getInvestimentos(idUsuario);
+        List<Investimento> investimentosList = new ArrayList<>();
+
+        try {
+            while (investimentosResultSet.next()) {
+                Investimento investimento = new Investimento(
+                        investimentosResultSet.getString("tipo"),
+                        investimentosResultSet.getString("descricao"),
+                        investimentosResultSet.getFloat("valor_investido"),
+                        investimentosResultSet.getDate("data_investimento"),
+                        investimentosResultSet.getFloat("retorno_estimado")
+                );
+                investimentosList.add(investimento);
+            }
 
             ObjectMapper objectMapper = new ObjectMapper();
-            ObjectNode jsonResponse = objectMapper.createObjectNode();
+            String jsonString = objectMapper.writeValueAsString(investimentosList);
 
-            try {
-                if (getAllInvestimentosResultSet.next()) {
-                    int investimentosCount = getAllInvestimentosResultSet.getInt("investimentos_count");
-                    jsonResponse.put("count", investimentosCount);
-                } else {
-                    jsonResponse.put("count", 0);
-                }
+            resp.setContentType("application/json");
+            resp.getWriter().write(jsonString);
 
-                String jsonString = jsonResponse.toString();
-                resp.setContentType("application/json");
-                resp.getWriter().write(jsonString);
-            } catch (Exception e) {
-                e.printStackTrace();
-                resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Internal Server Error");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Internal Server Error");
+        }
+    }
+
+    private void getQuantidadeDeInvestimentos(HttpServletResponse resp, int idUsuario) throws IOException {
+        ResultSet getAllInvestimentosResultSet = investimentoDAO.getQuantidadeDeInvestimentos(idUsuario);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectNode jsonResponse = objectMapper.createObjectNode();
+
+        try {
+            if (getAllInvestimentosResultSet.next()) {
+                int investimentosCount = getAllInvestimentosResultSet.getInt("investimentos_count");
+                jsonResponse.put("count", investimentosCount);
+            } else {
+                jsonResponse.put("count", 0);
             }
-        } else {
-            ResultSet investimentosResultSet = investimentoDAO.getInvestimentos(idUsuario);
 
-            List<Investimento> investimentosList = new ArrayList<>();
-
-            try {
-                while (investimentosResultSet.next()) {
-                    Investimento investimento = new Investimento(
-                            investimentosResultSet.getString("tipo"),
-                            investimentosResultSet.getString("descricao"),
-                            investimentosResultSet.getFloat("valor_investido"),
-                            investimentosResultSet.getDate("data_investimento"),
-                            investimentosResultSet.getFloat("retorno_estimado")
-                    );
-                    investimentosList.add(investimento);
-                }
-
-                ObjectMapper objectMapper = new ObjectMapper();
-                String jsonString = objectMapper.writeValueAsString(investimentosList);
-
-                resp.setContentType("application/json");
-                resp.getWriter().write(jsonString);
-
-            } catch (SQLException e) {
-                e.printStackTrace();
-                resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Internal Server Error");
-            }
+            String jsonString = jsonResponse.toString();
+            resp.setContentType("application/json");
+            resp.getWriter().write(jsonString);
+        } catch (Exception e) {
+            e.printStackTrace();
+            resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Internal Server Error");
         }
     }
 }
