@@ -29,7 +29,6 @@ function displayGastosData(gastosData) {
         var gastoHtml = `
             <div class="extrato-info hr">
                 <div class="d-flex align-items-center extrato-info-principal">
-                    <img src="../image/extrato-gasto.svg"> <!-- Assuming you have an image for gastos -->
                     <div class="ms-3">
                         <p class="extrato-local">${gasto.descricao}</p>
                         <p class="extrato-valor gasto">R$ ${gasto.valor.toFixed(2)}</p>
