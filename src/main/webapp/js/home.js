@@ -90,7 +90,7 @@ function getQuantidadeDeRecebimentos() {
     }
   };
 
-  xhr.open('GET', '/recebimentos', true);
+  xhr.open('GET', '/receitas', true);
   xhr.send();
 }
 
@@ -117,7 +117,7 @@ function getQuantidadeDeGastos() {
     }
   };
 
-  xhr.open('GET', '/gastos', true);
+  xhr.open('GET', '/despesas', true);
   xhr.send();
 }
 

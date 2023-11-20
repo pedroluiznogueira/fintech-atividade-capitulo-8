@@ -8,6 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ReceitaDAO {
+    private Connection conexao;
+
     public void insert(Connection conexao, Receita receita) {
         try {
             // Preparando o insert
@@ -40,6 +42,26 @@ public class ReceitaDAO {
             resultSet = stmt.executeQuery();
         } catch (SQLException exception) {
             System.err.println("Algo deu errado ao tentar selecionar todas as receitas");
+            exception.printStackTrace();
+        }
+        return resultSet;
+    }
+
+    public ResultSet getQuantidadeDeReceitas(int idUsuario) {
+        ResultSet resultSet = null;
+        try {
+            conexao = ConnectionManager
+                    .getInstance()
+                    .getConnection();
+
+            // Preparando o select count
+            String sqlSelect = "SELECT COUNT(*) as receitas_count FROM RECEITAS WHERE USUARIO_ID = ?";
+            PreparedStatement stmt = conexao.prepareStatement(sqlSelect);
+            stmt.setInt(1, idUsuario);
+
+            resultSet = stmt.executeQuery();
+        } catch (SQLException exception) {
+            System.err.println("Algo deu errado ao tentar selecionar o count das receitas");
             exception.printStackTrace();
         }
         return resultSet;
