@@ -1,7 +1,6 @@
 package fintech.dao;
 
 import fintech.models.Investimento;
-import fintech.models.Transacao;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -10,6 +9,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class InvestimentoDAO {
+    private Connection conexao;
+
     public void insert(Connection conexao, Investimento investimento) {
         try {
             // Preparando o insert
@@ -48,4 +49,25 @@ public class InvestimentoDAO {
         }
         return resultSet;
     }
+
+    public ResultSet getQuantidadeDeInvestimentos(int idUsuario) {
+        ResultSet resultSet = null;
+        try {
+            conexao = ConnectionManager
+                    .getInstance()
+                    .getConnection();
+
+            // Preparando o select count
+            String sqlSelect = "SELECT COUNT(*) as investimentos_count FROM INVESTIMENTOS WHERE USUARIO_ID = ?";
+            PreparedStatement stmt = conexao.prepareStatement(sqlSelect);
+            stmt.setInt(1, idUsuario);
+
+            resultSet = stmt.executeQuery();
+        } catch (SQLException exception) {
+            System.err.println("Algo deu errado ao tentar selecionar o count dos investimentos");
+            exception.printStackTrace();
+        }
+        return resultSet;
+    }
+
 }
