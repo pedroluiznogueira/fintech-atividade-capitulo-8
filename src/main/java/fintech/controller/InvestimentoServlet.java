@@ -3,6 +3,7 @@ package fintech.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import fintech.dao.InvestimentoDAO;
+import fintech.dao.UsuarioDAO;
 import fintech.models.Investimento;
 
 import javax.servlet.RequestDispatcher;
@@ -11,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -21,10 +23,12 @@ import java.util.List;
 @WebServlet("/investimentos")
 public class InvestimentoServlet extends HttpServlet {
     private InvestimentoDAO investimentoDAO;
+    private UsuarioDAO usuarioDAO;
 
     @Override
     public void init() {
         investimentoDAO = new InvestimentoDAO();
+        usuarioDAO = new UsuarioDAO();
         System.out.println("InvestimentoServlet init...");
     }
 
@@ -35,6 +39,8 @@ public class InvestimentoServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int idUsuario = getLoggedUserId(req);
+
         String tipoInvestimento = req.getParameter("tipo-investimento");
         String descricaoInvestimento = req.getParameter("descricao-investimento");
         Float valorInvestimento = Float.valueOf(req.getParameter("valor-investimento"));
@@ -47,7 +53,7 @@ public class InvestimentoServlet extends HttpServlet {
                 dataInvestimento,
                 valorRetorno);
 
-        boolean isCreated = investimentoDAO.insert(investimento);
+        boolean isCreated = investimentoDAO.insert(investimento, idUsuario);
 
         if (isCreated) {
             req.setAttribute("success", true);
@@ -61,8 +67,7 @@ public class InvestimentoServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        // @TODO: pegar do usuario buscado apartir do cpf no HttpSession
-        int idUsuario = 1;
+        int idUsuario = getLoggedUserId(req);
 
         String typeParam = req.getParameter("type");
 
@@ -115,5 +120,22 @@ public class InvestimentoServlet extends HttpServlet {
                 resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Internal Server Error");
             }
         }
+    }
+
+    private int getLoggedUserId(HttpServletRequest req) {
+        HttpSession httpSession = req.getSession();
+        String loggedUserCpf = (String) httpSession.getAttribute("cpf");
+        ResultSet getByCpfResultSet = usuarioDAO.getByCpf(loggedUserCpf);
+
+        try {
+            if (getByCpfResultSet.next()) {
+                return getByCpfResultSet.getInt("ID");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        // Caso o fluxo de registro nao seja seguido, para evitar erros em tempo de execucao
+        // retornando um id de usuario padrao
+        return 1;
     }
 }
