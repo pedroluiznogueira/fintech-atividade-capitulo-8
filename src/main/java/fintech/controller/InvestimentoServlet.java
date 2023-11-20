@@ -40,21 +40,20 @@ public class InvestimentoServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int idUsuario = HttpSessionUtils.getUsuarioIdUsingHttpSessionCpf(req, usuarioDAO);
-
         String tipoInvestimento = req.getParameter("tipo-investimento");
         String descricaoInvestimento = req.getParameter("descricao-investimento");
         Float valorInvestimento = Float.valueOf(req.getParameter("valor-investimento"));
         Date dataInvestimento = Date.valueOf(req.getParameter("data-investimento"));
         Float valorRetorno = Float.valueOf(req.getParameter("valor-retorno"));
 
-        Investimento investimento = new Investimento(tipoInvestimento,
+        Investimento investimento = new Investimento(idUsuario,
+                tipoInvestimento,
                 descricaoInvestimento,
                 valorInvestimento,
                 dataInvestimento,
                 valorRetorno);
 
-        boolean isCreated = investimentoDAO.insert(investimento, idUsuario);
-
+        boolean isCreated = investimentoDAO.insert(investimento);
         if (isCreated) {
             req.setAttribute("success", true);
         } else {
@@ -84,6 +83,7 @@ public class InvestimentoServlet extends HttpServlet {
         try {
             while (investimentosResultSet.next()) {
                 Investimento investimento = new Investimento(
+                        idUsuario,
                         investimentosResultSet.getString("tipo"),
                         investimentosResultSet.getString("descricao"),
                         investimentosResultSet.getFloat("valor_investido"),

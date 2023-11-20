@@ -1,13 +1,15 @@
 package fintech.models;
 
-import fintech.BancoEmMemoria;
-
 import java.util.Date;
-import java.util.UUID;
 
+/**
+ *
+ * Poderia ser um Record, porem deixando como classe por conta
+ * do conteudo ensinado ate entao.
+ *
+**/
 public class Investimento {
-    private final BancoEmMemoria bancoEmMemoria;
-    private final UUID idUsuario;
+    private final int idUsuario;
     private final String tipo;
     private final String descricao;
     private final Float valorInvestido;
@@ -15,14 +17,12 @@ public class Investimento {
     private final Float retornoEstimado;
 
     public Investimento(
-            BancoEmMemoria bancoEmMemoria,
-            UUID idUsuario,
+            int idUsuario,
             String tipo,
             String descricao,
             Float valorInvestido,
             Date dataInvestimento,
             Float retornoEstimado) {
-        this.bancoEmMemoria = bancoEmMemoria;
         this.idUsuario = idUsuario;
         this.tipo = tipo;
         this.descricao = descricao;
@@ -31,38 +31,7 @@ public class Investimento {
         this.retornoEstimado = retornoEstimado;
     }
 
-    public Investimento(
-            UUID idUsuario,
-            String tipo,
-            String descricao,
-            Float valorInvestido,
-            Date dataInvestimento,
-            Float retornoEstimado) {
-        this.bancoEmMemoria = null;
-        this.idUsuario = idUsuario;
-        this.tipo = tipo;
-        this.descricao = descricao;
-        this.valorInvestido = valorInvestido;
-        this.dataInvestimento = dataInvestimento;
-        this.retornoEstimado = retornoEstimado;
-    }
-
-    public Investimento(
-            String tipo,
-            String descricao,
-            Float valorInvestido,
-            Date dataInvestimento,
-            Float retornoEstimado) {
-        this.bancoEmMemoria = null;
-        this.idUsuario = null;
-        this.tipo = tipo;
-        this.descricao = descricao;
-        this.valorInvestido = valorInvestido;
-        this.dataInvestimento = dataInvestimento;
-        this.retornoEstimado = retornoEstimado;
-    }
-
-    public UUID getIdUsuario() {
+    public int getIdUsuario() {
         return idUsuario;
     }
 
