@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
@@ -38,9 +38,7 @@
                     <div class="d-flex mb-3 avatar">
                         <img src="../image/avatar.svg">
                         <p class="m-2 text-name">
-                            Olá 
-                            <br>
-                            Eduardo
+                            Olá
                         </p>
                     </div>
                     <div class="saldo">
