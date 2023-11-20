@@ -50,82 +50,12 @@
                     </a>
                 </div>
                 <div class="extrato">
-                    <div class="extrato-info hr">
-                        <div>
-                            <p class="extrato-data">
-                                20/01/2023
-                            </p>
-                        </div>
-                        <div class="d-flex align-items-center extrato-info-principal">
-                            <img src="../image/extrato-gasto.svg">
-                            <div class="ms-3">
-                                <p class="extrato-local">
-                                    Restaurante
-                                </p>
-                                <p class="extrato-valor">
-                                    R$ 90,00
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="extrato-info hr">
-                        <div>
-                            <p class="extrato-data">
-                                20/01/2023
-                            </p>
-                        </div>
-                        <div class="d-flex align-items-center extrato-info-principal">
-                            <img src="../image/extrato-gasto.svg">
-                            <div class="ms-3">
-                                <p class="extrato-local">
-                                    Restaurante
-                                </p>
-                                <p class="extrato-valor">
-                                    R$ 90,00
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="extrato-info hr">
-                        <div>
-                            <p class="extrato-data">
-                                20/01/2023
-                            </p>
-                        </div>
-                        <div class="d-flex align-items-center extrato-info-principal">
-                            <img src="../image/extrato-gasto.svg">
-                            <div class="ms-3">
-                                <p class="extrato-local">
-                                    Restaurante
-                                </p>
-                                <p class="extrato-valor">
-                                    R$ 90,00
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="extrato-info">
-                        <div>
-                            <p class="extrato-data">
-                                20/01/2023
-                            </p>
-                        </div>
-                        <div class="d-flex align-items-center extrato-info-principal">
-                            <img src="../image/extrato-gasto.svg">
-                            <div class="ms-3">
-                                <p class="extrato-local">
-                                    Restaurante
-                                </p>
-                                <p class="extrato-valor">
-                                    R$ 90,00
-                                </p>
-                            </div>
-                        </div>
-                    </div>                    
+                    <!-- Dados do extrato de investimentos vai ser inserida aqui dinamicamente -->
                 </div>
             </div>
         </div>
     </main>
     <script src="../js/main.js"></script>
+    <script src="../js/extrato-investimento.js"></script>
 </body>
 </html>
