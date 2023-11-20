@@ -3,8 +3,10 @@ package fintech.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import fintech.dao.DespesaDAO;
-import fintech.dao.InvestimentoDAO;
+import fintech.models.Despesa;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +27,28 @@ public class DespesaServlet extends HttpServlet {
     @Override
     public void destroy() {
         System.out.println("DespesaServlet destroy...");
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String tipoDespesa = req.getParameter("tipo-gasto");
+        String descricaoDespesa = req.getParameter("descricao-gasto");
+        Float valorDespesa = Float.valueOf(req.getParameter("valor-gasto"));
+
+        Despesa despesa = new Despesa(tipoDespesa,
+                descricaoDespesa,
+                valorDespesa);
+
+        boolean isCreated = despesaDAO.insert(despesa);
+
+        if (isCreated) {
+            req.setAttribute("success", true);
+        } else {
+            req.setAttribute("success", false);
+        }
+
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/pages/cadastrar-gasto.jsp");
+        requestDispatcher.forward(req, resp);
     }
 
     @Override

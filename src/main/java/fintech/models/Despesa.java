@@ -38,6 +38,16 @@ public class Despesa extends Entidade {
         this.valor = valor;
     }
 
+    public Despesa(
+            String categoria,
+            String descricao,
+            Float valor) {
+        this.bancoEmMemoria = null;
+        this.idUsuario = null;
+        this.descricao = descricao;
+        this.valor = valor;
+    }
+
     public UUID getIdUsuario() {
         return idUsuario;
     }

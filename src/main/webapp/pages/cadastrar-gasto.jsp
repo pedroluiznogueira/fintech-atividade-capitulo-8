@@ -38,9 +38,23 @@
                 </ul>
             </div>
 
+            <!-- Mensagem de sucesso -->
+            <c:if test="${not empty requestScope.success and requestScope.success eq true}">
+                <div class="alert alert-success" role="alert">
+                    Gasto criado com sucesso
+                </div>
+            </c:if>
+
+            <!-- Mensagem de erro -->
+            <c:if test="${not empty requestScope.success and requestScope.success eq false}">
+                <div class="alert alert-danger" role="alert">
+                    Dados inválidos
+                </div>
+            </c:if>
+
             <p class="fs-1 fw-bold">Cadastro de Gasto</p>
             <div class="form-center-desk">
-                <form action="" name="cadastro-gasto" id="cadastro-gasto" method="post" class="form-width">
+                <form action="/despesa" name="cadastro-gasto" id="cadastro-gasto" method="post" class="form-width">
                     <select name="tipo-gasto" class="form-number form-control my-4 form-width form-login" required style="color: rgba(0, 0, 0, 0.60);">
                         <option value="0">Tipo de Gasto</option>
                         <option value="alimentacao">Alimentação</option>
