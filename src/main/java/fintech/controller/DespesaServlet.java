@@ -2,9 +2,8 @@ package fintech.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import fintech.controller.utils.UsuarioUtils;
+import fintech.controller.utils.HttpSessionUtils;
 import fintech.dao.DespesaDAO;
-import fintech.dao.InvestimentoDAO;
 import fintech.dao.UsuarioDAO;
 
 import javax.servlet.annotation.WebServlet;
@@ -33,7 +32,7 @@ public class DespesaServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        int idUsuario = UsuarioUtils.getUsuarioIdUsingHttpSessionCpf(req, usuarioDAO);
+        int idUsuario = HttpSessionUtils.getUsuarioIdUsingHttpSessionCpf(req, usuarioDAO);
 
         ResultSet getQuantidadeDeDespesasResultSet = despesaDAO.getQuantidadeDeDespesas(idUsuario);
 

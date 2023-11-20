@@ -7,7 +7,7 @@ import javax.servlet.http.HttpSession;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public final class UsuarioUtils {
+public final class HttpSessionUtils {
     public static int getUsuarioIdUsingHttpSessionCpf(HttpServletRequest req, UsuarioDAO usuarioDAO) {
         HttpSession httpSession = req.getSession();
         String loggedUserCpf = (String) httpSession.getAttribute("cpf");
