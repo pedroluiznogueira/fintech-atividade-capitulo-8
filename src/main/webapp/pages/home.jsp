@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/menu-style.css">
-    <link rel="stylesheet" href="css/index-style.css">
-    <link rel="stylesheet" href="css/home-style.css">
+    <link rel="stylesheet" href="../css/menu-style.css">
+    <link rel="stylesheet" href="../css/index-style.css">
+    <link rel="stylesheet" href="../css/home-style.css">
     <title>Fintech | Home</title>
 </head>
 <body>
@@ -15,8 +15,8 @@
             <h1 class="fs-3 fw-bold">FINTECH</h1>
         </div>
         <div class="d-flex">
-            <img src="image/reload.svg" class="mx-4" onclick="reloadPage()" style="cursor: pointer">
-            <img src="image/config.svg" style="cursor: pointer">
+            <img src="../image/reload.svg" class="mx-4" onclick="reloadPage()" style="cursor: pointer">
+            <img src="../image/config.svg" style="cursor: pointer">
         </div>
     </header>
     <main>
@@ -36,7 +36,7 @@
             <div class="px-2">
                 <div class="background-color-blue my-2 p-3 rounded-2 shadow-lg div-saldo">
                     <div class="d-flex mb-3 avatar">
-                        <img src="image/avatar.svg">
+                        <img src="../image/avatar.svg">
                         <p class="m-2 text-name">
                             Olá 
                             <br>
@@ -56,19 +56,19 @@
                     <ul class="gallery">
                         <li class="dashboard-carrossel">
                             <div>
-                                <img src="./image/investimento-black.svg">
+                                <img src="../image/investimento-black.svg">
                                 <h3 onclick="mostrarDiv('#dashboard-investimento')">Investimentos</h3>
                             </div>
                         </li>
                         <li class="dashboard-carrossel">
                             <div>
-                                <img src="./image/recebimento-black.svg">
+                                <img src="../image/recebimento-black.svg">
                                 <h3 onclick="mostrarDiv('#dashboard-recebimento')">Recebimentos</h3>
                             </div>
                         </li>
                         <li class="dashboard-carrossel">
                             <div>
-                                <img src="./image/gasto-black.svg">
+                                <img src="../image/gasto-black.svg">
                                 <h3 onclick="mostrarDiv('#dashboard-gasto')">Gastos</h3>
                             </div>
                         </li>
@@ -79,7 +79,7 @@
                         <h4 style="color: black;">Total de Investimentos</h4>
                         <!-- DASHBOARD DE CADA MENU ESCOLHIDO -->
                         <div class="d-flex py-3 extrato">
-                            <a href="./pages/extrato-investimento.html">
+                            <a href="extrato-investimento.html">
                                 <button class="btn px-4 button-extrato">Extrato dos Investimentos</button>
                             </a>
                         </div>
@@ -88,7 +88,7 @@
                         <h4 style="color: black;"style="color: black;">Total de Recebimentos</h4>
                         <!-- DASHBOARD DE CADA MENU ESCOLHIDO -->
                         <div class="d-flex py-3 extrato">
-                            <a href="./pages/extrato-recebimento.html">
+                            <a href="extrato-recebimento.html">
                                 <button class="btn px-4 button-extrato">Extrato dos Recebimentos</button>
                             </a>
                         </div>
@@ -97,7 +97,7 @@
                         <h4 style="color: black;">Total de Gastos</h4>
                         <!-- DASHBOARD DE CADA MENU ESCOLHIDO -->
                         <div class="d-flex py-3 extrato">
-                            <a href="./pages/extrato-gasto.html">
+                            <a href="extrato-gasto.html">
                                 <button class="btn px-4 button-extrato">Extrato dos Gastos</button>
                             </a>
                         </div>
@@ -106,7 +106,7 @@
             </div>
         </div>
     </main>
-    <script src="js/main.js"></script>
-    <script src="js/home.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/home.js"></script>
 </body>
 </html>
