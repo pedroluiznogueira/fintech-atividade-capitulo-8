@@ -32,7 +32,7 @@ public class ReceitaDAO {
         }
     }
 
-    public boolean insert(Receita recebimento) {
+    public boolean insert(Receita receita) {
         try {
             conexao = ConnectionManager
                     .getInstance()
@@ -45,16 +45,16 @@ public class ReceitaDAO {
             PreparedStatement stmt = conexao.prepareStatement(sqlInsert);
 
             // Inserindo os valores nas mascaras do insert
-            stmt.setInt(1, 1); // TODO: por hora nao usando um Usuario real, dito que foi pedido para nao fazemos para a tabela de usuarios ainda
-            stmt.setString(2, recebimento.getTipo());
-            stmt.setString(3,  recebimento.getDescricao());
-            stmt.setDouble(4, recebimento.getValor());
+            stmt.setInt(1, receita.getIdUsuario());
+            stmt.setString(2, receita.getTipo());
+            stmt.setString(3,  receita.getDescricao());
+            stmt.setDouble(4, receita.getValor());
 
             stmt.executeUpdate();
-            System.out.println("Recebimento inserido com sucesso");
+            System.out.println("Receita inserida com sucesso");
             return true;
         } catch (SQLException exception) {
-            System.err.println("Algo deu errado ao tentar inserir um recebimento");
+            System.err.println("Algo deu errado ao tentar inserir uma receita");
             exception.printStackTrace();
             return false;
         }

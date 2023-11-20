@@ -1,8 +1,5 @@
 package fintech.models;
 
-import fintech.BancoEmMemoria;
-import java.util.UUID;
-
 public class Receita extends Entidade {
     private final int idUsuario;
     private final String tipo;
