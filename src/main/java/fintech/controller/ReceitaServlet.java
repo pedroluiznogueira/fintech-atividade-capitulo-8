@@ -11,10 +11,13 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet("/receitas")
 public class ReceitaServlet extends HttpServlet {
@@ -61,14 +64,50 @@ public class ReceitaServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         int idUsuario = HttpSessionUtils.getUsuarioIdUsingHttpSessionCpf(req, usuarioDAO);
 
-        ResultSet getQuantidadeDeReceitasResultSet = receitaDAO.getQuantidadeDeReceitas(idUsuario);
+        String typeParam = req.getParameter("type");
+        if ("count".equals(typeParam)) {
+            getQuantidadeDeReceitas(resp, idUsuario);
+        } else {
+            getAllReceitas(resp, idUsuario);
+        }
+    }
+
+    private void getAllReceitas(HttpServletResponse resp, int idUsuario) throws IOException {
+        ResultSet receitasResultSet = receitaDAO.getReceitas(idUsuario);
+        List<Receita> receitasList = new ArrayList<>();
+
+        try {
+            while (receitasResultSet.next()) {
+                Receita receita = new Receita(
+                        idUsuario,
+                        receitasResultSet.getString("tipo"),
+                        receitasResultSet.getString("descricao"),
+                        receitasResultSet.getFloat("valor")
+                );
+                receitasList.add(receita);
+            }
+
+            ObjectMapper objectMapper = new ObjectMapper();
+            String jsonString = objectMapper.writeValueAsString(receitasList);
+
+            resp.setContentType("application/json");
+            resp.getWriter().write(jsonString);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Internal Server Error");
+        }
+    }
+
+    private void getQuantidadeDeReceitas(HttpServletResponse resp, int idUsuario) throws IOException {
+        ResultSet getAllReceitasResultSet = receitaDAO.getQuantidadeDeReceitas(idUsuario);
 
         ObjectMapper objectMapper = new ObjectMapper();
         ObjectNode jsonResponse = objectMapper.createObjectNode();
 
         try {
-            if (getQuantidadeDeReceitasResultSet.next()) {
-                int receitasCount = getQuantidadeDeReceitasResultSet.getInt("receitas_count");
+            if (getAllReceitasResultSet.next()) {
+                int receitasCount = getAllReceitasResultSet.getInt("receitas_count");
                 jsonResponse.put("count", receitasCount);
             } else {
                 jsonResponse.put("count", 0);

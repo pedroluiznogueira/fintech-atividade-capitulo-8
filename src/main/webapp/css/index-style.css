@@ -21,3 +21,22 @@ body{
     background-color: #AAAA91;
     margin-bottom: 8px;
 }
+
+@media(min-width: 680px){
+    .div-saldo{
+        display: flex;
+    }
+    .div-saldo img{
+        width: 60px;
+    }
+    .div-saldo div{
+        display: flex;
+        align-items: center;
+    }
+    .avatar{
+        width: 15%;
+    }
+    .text-name{
+        font-size: 22px;
+    }
+}

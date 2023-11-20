@@ -24,6 +24,7 @@
                 <div class="alert alert-success" role="alert">
                     Usuario criado com sucesso
                 </div>
+                <a href="/pages/login.jsp">Ir para login</a>
             </c:if>
 
             <!-- Mensagem de erro -->

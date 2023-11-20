@@ -36,12 +36,11 @@
             </div>
             <div>
                 <div class="background-color-blue my-2 p-3 rounded-2 shadow-lg div-saldo">
-                    <div class="saldo">
-                        <h3>
-                            Saldo Disponível:
-                            <br>
-                            R$ 1.000.000.000,00
-                        </h3>
+                    <div class="d-flex mb-3 avatar">
+                        <img src="../image/avatar.svg">
+                        <p class="m-2 text-name">
+                            Olá
+                        </p>
                     </div>
                 </div>
                 <div class="text-center">
