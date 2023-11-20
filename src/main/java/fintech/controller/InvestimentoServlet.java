@@ -2,6 +2,7 @@ package fintech.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import fintech.controller.utils.UsuarioUtils;
 import fintech.dao.InvestimentoDAO;
 import fintech.dao.UsuarioDAO;
 import fintech.models.Investimento;
@@ -12,7 +13,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -39,7 +39,7 @@ public class InvestimentoServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int idUsuario = getLoggedUserId(req);
+        int idUsuario = UsuarioUtils.getUsuarioIdUsingHttpSessionCpf(req, usuarioDAO);
 
         String tipoInvestimento = req.getParameter("tipo-investimento");
         String descricaoInvestimento = req.getParameter("descricao-investimento");
@@ -67,7 +67,7 @@ public class InvestimentoServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        int idUsuario = getLoggedUserId(req);
+        int idUsuario = UsuarioUtils.getUsuarioIdUsingHttpSessionCpf(req, usuarioDAO);
 
         String typeParam = req.getParameter("type");
 
@@ -120,22 +120,5 @@ public class InvestimentoServlet extends HttpServlet {
                 resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Internal Server Error");
             }
         }
-    }
-
-    private int getLoggedUserId(HttpServletRequest req) {
-        HttpSession httpSession = req.getSession();
-        String loggedUserCpf = (String) httpSession.getAttribute("cpf");
-        ResultSet getByCpfResultSet = usuarioDAO.getByCpf(loggedUserCpf);
-
-        try {
-            if (getByCpfResultSet.next()) {
-                return getByCpfResultSet.getInt("ID");
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        // Caso o fluxo de registro nao seja seguido, para evitar erros em tempo de execucao
-        // retornando um id de usuario padrao
-        return 1;
     }
 }
