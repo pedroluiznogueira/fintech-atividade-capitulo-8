@@ -14,6 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet("/investimentos")
 public class InvestimentoServlet extends HttpServlet {
@@ -61,25 +64,56 @@ public class InvestimentoServlet extends HttpServlet {
         // @TODO: pegar do usuario buscado apartir do cpf no HttpSession
         int idUsuario = 1;
 
-        ResultSet getAllInvestimentosResultSet = investimentoDAO.getQuantidadeDeInvestimentos(idUsuario);
+        String typeParam = req.getParameter("type");
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        ObjectNode jsonResponse = objectMapper.createObjectNode();
+        if ("count".equals(typeParam)) {
+            ResultSet getAllInvestimentosResultSet = investimentoDAO.getQuantidadeDeInvestimentos(idUsuario);
 
-        try {
-            if (getAllInvestimentosResultSet.next()) {
-                int investimentosCount = getAllInvestimentosResultSet.getInt("investimentos_count");
-                jsonResponse.put("count", investimentosCount);
-            } else {
-                jsonResponse.put("count", 0);
+            ObjectMapper objectMapper = new ObjectMapper();
+            ObjectNode jsonResponse = objectMapper.createObjectNode();
+
+            try {
+                if (getAllInvestimentosResultSet.next()) {
+                    int investimentosCount = getAllInvestimentosResultSet.getInt("investimentos_count");
+                    jsonResponse.put("count", investimentosCount);
+                } else {
+                    jsonResponse.put("count", 0);
+                }
+
+                String jsonString = jsonResponse.toString();
+                resp.setContentType("application/json");
+                resp.getWriter().write(jsonString);
+            } catch (Exception e) {
+                e.printStackTrace();
+                resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Internal Server Error");
             }
+        } else {
+            ResultSet investimentosResultSet = investimentoDAO.getInvestimentos(idUsuario);
 
-            String jsonString = jsonResponse.toString();
-            resp.setContentType("application/json");
-            resp.getWriter().write(jsonString);
-        } catch (Exception e) {
-            e.printStackTrace();
-            resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Internal Server Error");
+            List<Investimento> investimentosList = new ArrayList<>();
+
+            try {
+                while (investimentosResultSet.next()) {
+                    Investimento investimento = new Investimento(
+                            investimentosResultSet.getString("tipo"),
+                            investimentosResultSet.getString("descricao"),
+                            investimentosResultSet.getFloat("valor_investido"),
+                            investimentosResultSet.getDate("data_investimento"),
+                            investimentosResultSet.getFloat("retorno_estimado")
+                    );
+                    investimentosList.add(investimento);
+                }
+
+                ObjectMapper objectMapper = new ObjectMapper();
+                String jsonString = objectMapper.writeValueAsString(investimentosList);
+
+                resp.setContentType("application/json");
+                resp.getWriter().write(jsonString);
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+                resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Internal Server Error");
+            }
         }
     }
 }
