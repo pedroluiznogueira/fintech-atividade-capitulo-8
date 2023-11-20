@@ -1,7 +1,9 @@
 package fintech.dao;
 
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.util.Properties;
 
 public class ConnectionManager {
     private static ConnectionManager connectionManager;
@@ -17,12 +19,19 @@ public class ConnectionManager {
 
     public Connection getConnection() {
         Connection connection = null;
-        // @TODO: usar variaveis de ambiente para as credenciais do banco de dados
+
         try {
-            connection = DriverManager.getConnection(
-                    "jdbc:oracle:thin:@localhost:1521:",
-                    "fintech",
-                    "mysecretpassword");
+            Properties properties = new Properties();
+            InputStream input = getClass()
+                    .getClassLoader()
+                    .getResourceAsStream("application.properties");
+            properties.load(input);
+
+            String jdbcUrl = properties.getProperty("DB_URL");
+            String username = properties.getProperty("DB_USERNAME");
+            String password = properties.getProperty("DB_PASSWORD");
+
+            connection = DriverManager.getConnection(jdbcUrl, username, password);
         } catch (Exception exception){
             exception.printStackTrace();
         }
