@@ -54,7 +54,7 @@
 
             <p class="fs-1 fw-bold">Cadastro de Gasto</p>
             <div class="form-center-desk">
-                <form action="/despesa" name="cadastro-gasto" id="cadastro-gasto" method="post" class="form-width">
+                <form action="/despesas" name="cadastro-gasto" id="cadastro-gasto" method="post" class="form-width">
                     <select name="tipo-gasto" class="form-number form-control my-4 form-width form-login" required style="color: rgba(0, 0, 0, 0.60);">
                         <option value="0">Tipo de Gasto</option>
                         <option value="alimentacao">Alimentação</option>
