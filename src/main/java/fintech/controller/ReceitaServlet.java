@@ -2,12 +2,14 @@ package fintech.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import fintech.dao.DespesaDAO;
-import fintech.dao.ReceitaDAO;
+import fintech.dao.RecebimentoDAO;
+import fintech.models.Recebimento;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequest;;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.ResultSet;
@@ -25,6 +27,28 @@ public class ReceitaServlet extends HttpServlet {
     @Override
     public void destroy() {
         System.out.println("ReceitaServlet destroy...");
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String tipoRecebimento = req.getParameter("tipo-recebimento");
+        String descricaoRecebimento = req.getParameter("descricao-recebimento");
+        Float valorRecebimento = Float.valueOf(req.getParameter("valor-recebimento"));
+
+        Recebimento recebimento = new Recebimento(tipoRecebimento,
+                descricaoRecebimento,
+                valorRecebimento);
+
+        boolean isCreated = recebimentoDAO.insert(recebimento);
+
+        if (isCreated) {
+            req.setAttribute("success", true);
+        } else {
+            req.setAttribute("success", false);
+        }
+
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/pages/cadastrar-recebimento");
+        requestDispatcher.forward(req, resp);
     }
 
     @Override
