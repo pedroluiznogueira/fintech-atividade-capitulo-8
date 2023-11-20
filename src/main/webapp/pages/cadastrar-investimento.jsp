@@ -14,7 +14,7 @@
 <body>
     <header class="container-fluid text-center py-1 d-flex">
         <div class="center">
-            <a href="home.jsp" style="text-decoration: none; color: #FFF;">
+            <a href="pages/home.jsp" style="text-decoration: none; color: #FFF;">
                 <h1 class="fs-3 fw-bold">FINTECH</h1>
             </a>
         </div>
