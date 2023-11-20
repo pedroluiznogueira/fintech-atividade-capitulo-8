@@ -75,6 +75,26 @@ public class ReceitaDAO {
         return resultSet;
     }
 
+    public ResultSet getReceitas(int usuarioId) {
+        ResultSet resultSet = null;
+        try {
+            conexao = ConnectionManager
+                    .getInstance()
+                    .getConnection();
+
+            // Preparando o select all
+            String sqlSelect = "SELECT * FROM RECEITAS WHERE USUARIO_ID = ?";
+            PreparedStatement stmt = conexao.prepareStatement(sqlSelect);
+            stmt.setInt(1, usuarioId);
+
+            resultSet = stmt.executeQuery();
+        } catch (SQLException exception) {
+            System.err.println("Algo deu errado ao tentar selecionar todas as receitas");
+            exception.printStackTrace();
+        }
+        return resultSet;
+    }
+
     public ResultSet getQuantidadeDeReceitas(int idUsuario) {
         ResultSet resultSet = null;
         try {

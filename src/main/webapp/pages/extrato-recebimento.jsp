@@ -36,12 +36,11 @@
             </div>
             <div>
                 <div class="background-color-blue my-2 p-3 rounded-2 shadow-lg div-saldo">
-                    <div class="saldo">
-                        <h3>
-                            Saldo Disponível:
-                            <br>
-                            R$ 1.000.000.000,00
-                        </h3>
+                    <div class="d-flex mb-3 avatar">
+                        <img src="../image/avatar.svg">
+                        <p class="m-2 text-name">
+                            Olá
+                        </p>
                     </div>
                 </div>
                 <div class="text-center">
@@ -50,82 +49,12 @@
                     </a>
                 </div>
                 <div class="extrato">
-                    <div class="extrato-info hr">
-                        <div>
-                            <p class="extrato-data">
-                                20/01/2023
-                            </p>
-                        </div>
-                        <div class="d-flex align-items-center extrato-info-principal">
-                            <img src="../image/extrato-gasto.svg">
-                            <div class="ms-3">
-                                <p class="extrato-local">
-                                    Restaurante
-                                </p>
-                                <p class="extrato-valor recebimento">
-                                    R$ 90,00
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="extrato-info hr">
-                        <div>
-                            <p class="extrato-data">
-                                20/01/2023
-                            </p>
-                        </div>
-                        <div class="d-flex align-items-center extrato-info-principal">
-                            <img src="../image/extrato-gasto.svg">
-                            <div class="ms-3">
-                                <p class="extrato-local">
-                                    Restaurante
-                                </p>
-                                <p class="extrato-valor recebimento">
-                                    R$ 90,00
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="extrato-info hr">
-                        <div>
-                            <p class="extrato-data">
-                                20/01/2023
-                            </p>
-                        </div>
-                        <div class="d-flex align-items-center extrato-info-principal">
-                            <img src="../image/extrato-gasto.svg">
-                            <div class="ms-3">
-                                <p class="extrato-local">
-                                    Restaurante
-                                </p>
-                                <p class="extrato-valor recebimento">
-                                    R$ 90,00
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="extrato-info">
-                        <div>
-                            <p class="extrato-data">
-                                20/01/2023
-                            </p>
-                        </div>
-                        <div class="d-flex align-items-center extrato-info-principal">
-                            <img src="../image/extrato-gasto.svg">
-                            <div class="ms-3">
-                                <p class="extrato-local">
-                                    Restaurante
-                                </p>
-                                <p class="extrato-valor recebimento">
-                                    R$ 90,00
-                                </p>
-                            </div>
-                        </div>
-                    </div>                    
+                    <!-- Dados do extrato de recebimento vai ser inserida aqui dinamicamente -->
                 </div>
             </div>
         </div>
     </main>
     <script src="../js/main.js"></script>
+    <script src="../js/extrato-recebimento.js"></script>
 </body>
 </html>

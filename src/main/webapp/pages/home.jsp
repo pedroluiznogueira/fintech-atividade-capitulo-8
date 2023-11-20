@@ -42,13 +42,6 @@
                             Olá
                         </p>
                     </div>
-                    <div class="saldo">
-                        <h3>
-                            Saldo Disponível:
-                            <br>
-                            R$ 1.000.000.000,00
-                        </h3>
-                    </div>
                 </div>
                 <div class="text-black">
                     <h2 class="title-dashboard">Dashboard</h2>
