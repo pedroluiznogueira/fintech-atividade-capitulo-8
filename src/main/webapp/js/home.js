@@ -26,104 +26,50 @@ slider.addEventListener('mousemove', e => {
   slider.scrollLeft = scrollLeft - walk;
 });
 
+function mostrarQuantidade(elementId, quantidade, label) {
+  var h4Element = document.querySelector(elementId + ' h4');
+  if (h4Element) {
+    h4Element.innerHTML = 'Total de ' + label + ': ' + quantidade;
+  }
+}
+
+function fetchDataAndDisplay(url, elementId, label) {
+  var xhr = new XMLHttpRequest();
+
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState === XMLHttpRequest.DONE) {
+      if (xhr.status === 200) {
+        var jsonResponse = JSON.parse(xhr.responseText);
+        console.log('Quantidade de ' + label + ':', jsonResponse.count);
+
+        mostrarQuantidade(elementId, jsonResponse.count, label);
+      } else {
+        console.error('Error fetching data:', xhr.status, xhr.statusText);
+      }
+    }
+  };
+
+  xhr.open('GET', url, true);
+  xhr.send();
+}
+
 function mostrarDiv(id) {
   let divs = document.querySelectorAll('.mostrar');
   for (let i = 0; i < divs.length; i++) {
-      divs[i].style.display = 'none';
+    divs[i].style.display = 'none';
   }
   let div = document.querySelector(id);
   div.style.display = 'block';
 
   switch (id) {
     case '#dashboard-investimento':
-        getQuantidadeDeInvestimentos();
-        break;
+      fetchDataAndDisplay('/investimentos', id, 'Investimentos');
+      break;
     case '#dashboard-recebimento':
-      getQuantidadeDeRecebimentos();
+      fetchDataAndDisplay('/receitas', id, 'Recebimentos');
       break;
     case '#dashboard-gasto':
-      getQuantidadeDeGastos();
+      fetchDataAndDisplay('/despesas', id, 'Gastos');
       break;
-  }
-}
-
-function getQuantidadeDeInvestimentos() {
-  var xhr = new XMLHttpRequest();
-
-  xhr.onreadystatechange = function() {
-    if (xhr.readyState === XMLHttpRequest.DONE) {
-      if (xhr.status === 200) {
-        var jsonResponse = JSON.parse(xhr.responseText);
-        console.log('Quantidade de Investimentos:', jsonResponse.count);
-
-        mostrarQuantidadeDeInvestimentos(jsonResponse.count);
-      } else {
-        console.error('Error fetching data:', xhr.status, xhr.statusText);
-      }
-    }
-  };
-
-  xhr.open('GET', '/investimentos', true);
-  xhr.send();
-}
-
-function mostrarQuantidadeDeInvestimentos(quantidadeDeInvestimentos) {
-  var h4Element = document.querySelector('#dashboard-investimento h4');
-  if (h4Element) {
-    h4Element.innerHTML += ': ' + quantidadeDeInvestimentos;
-  }
-}
-
-function getQuantidadeDeRecebimentos() {
-  var xhr = new XMLHttpRequest();
-
-  xhr.onreadystatechange = function() {
-    if (xhr.readyState === XMLHttpRequest.DONE) {
-      if (xhr.status === 200) {
-        var jsonResponse = JSON.parse(xhr.responseText);
-        console.log('Quantidade de Recebimentos:', jsonResponse.count);
-
-        mostrarQuantidadeDeRecebimentos(jsonResponse.count);
-      } else {
-        console.error('Error fetching data:', xhr.status, xhr.statusText);
-      }
-    }
-  };
-
-  xhr.open('GET', '/receitas', true);
-  xhr.send();
-}
-
-function mostrarQuantidadeDeRecebimentos(quantidadeDeRecebimentos) {
-  var h4Element = document.querySelector('#dashboard-recebimento h4');
-  if (h4Element) {
-    h4Element.innerHTML += ': ' + quantidadeDeRecebimentos;
-  }
-}
-
-function getQuantidadeDeGastos() {
-  var xhr = new XMLHttpRequest();
-
-  xhr.onreadystatechange = function() {
-    if (xhr.readyState === XMLHttpRequest.DONE) {
-      if (xhr.status === 200) {
-        var jsonResponse = JSON.parse(xhr.responseText);
-        console.log('Quantidade de Gastos:', jsonResponse.count);
-
-        mostrarQuantidadeDeGastos(jsonResponse.count);
-      } else {
-        console.error('Error fetching data:', xhr.status, xhr.statusText);
-      }
-    }
-  };
-
-  xhr.open('GET', '/despesas', true);
-  xhr.send();
-}
-
-function mostrarQuantidadeDeGastos(quantidadeDeGastos) {
-  var h4Element = document.querySelector('#dashboard-gasto h4');
-  if (h4Element) {
-    h4Element.innerHTML += ': ' + quantidadeDeGastos;
   }
 }
