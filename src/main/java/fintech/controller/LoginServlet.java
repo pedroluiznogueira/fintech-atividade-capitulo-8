@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -43,6 +44,8 @@ public class LoginServlet extends HttpServlet {
                 if (senhaExistente.equals(senhaInserida)) {
                     req.setAttribute("success", true);
                     resp.sendRedirect(req.getContextPath() + "/pages/home.jsp");
+                    HttpSession httpSession = req.getSession();
+                    httpSession.setAttribute("cpf", cpf);
                     return;
                 } else {
                     req.setAttribute("success", false);
