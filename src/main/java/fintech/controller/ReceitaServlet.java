@@ -71,19 +71,18 @@ public class ReceitaServlet extends HttpServlet {
             getAllReceitas(resp, idUsuario);
         }
     }
+
     private void getAllReceitas(HttpServletResponse resp, int idUsuario) throws IOException {
-        ResultSet receitasResultSet = investimentoDAO.getInvestimentos(idUsuario);
-        List<Investimento> receitasList = new ArrayList<>();
+        ResultSet receitasResultSet = receitaDAO.getReceitas(idUsuario);
+        List<Receita> receitasList = new ArrayList<>();
 
         try {
             while (receitasResultSet.next()) {
-                Investimento receita = new Investimento(
+                Receita receita = new Receita(
                         idUsuario,
                         receitasResultSet.getString("tipo"),
                         receitasResultSet.getString("descricao"),
-                        receitasResultSet.getFloat("valor_investido"),
-                        receitasResultSet.getDate("data_investimento"),
-                        receitasResultSet.getFloat("retorno_estimado")
+                        receitasResultSet.getFloat("valor")
                 );
                 receitasList.add(receita);
             }
@@ -99,6 +98,7 @@ public class ReceitaServlet extends HttpServlet {
             resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Internal Server Error");
         }
     }
+
     private void getQuantidadeDeReceitas(HttpServletResponse resp, int idUsuario) throws IOException {
         ResultSet getAllReceitasResultSet = receitaDAO.getQuantidadeDeReceitas(idUsuario);
 
