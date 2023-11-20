@@ -13,7 +13,7 @@ public class ReceitaDAO {
     public void insert(Connection conexao, Receita receita) {
         try {
             // Preparando o insert
-            String sqlInsert = "INSERT INTO RECEITAS " +
+            String sqlInsert = "INSERT INTO RECEITA " +
                     "(USUARIO_ID, TIPO, DESCRICAO, VALOR)" +
                     " VALUES (?, ?, ?, ?)";
             PreparedStatement stmt = conexao.prepareStatement(sqlInsert);
@@ -29,6 +29,34 @@ public class ReceitaDAO {
         } catch (SQLException exception) {
             System.err.println("Algo deu errado ao tentar inserir uma receita");
             exception.printStackTrace();
+        }
+    }
+
+    public boolean insert(Receita receita) {
+        try {
+            conexao = ConnectionManager
+                    .getInstance()
+                    .getConnection();
+
+            // Preparando o insert
+            String sqlInsert = "INSERT INTO RECEITAS" +
+                    "(USUARIO_ID, TIPO, DESCRICAO, VALOR)" +
+                    " VALUES (?, ?, ?, ?)";
+            PreparedStatement stmt = conexao.prepareStatement(sqlInsert);
+
+            // Inserindo os valores nas mascaras do insert
+            stmt.setInt(1, receita.getIdUsuario());
+            stmt.setString(2, receita.getTipo());
+            stmt.setString(3,  receita.getDescricao());
+            stmt.setDouble(4, receita.getValor());
+
+            stmt.executeUpdate();
+            System.out.println("Receita inserida com sucesso");
+            return true;
+        } catch (SQLException exception) {
+            System.err.println("Algo deu errado ao tentar inserir uma receita");
+            exception.printStackTrace();
+            return false;
         }
     }
 
