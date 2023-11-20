@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../css/menu-style.css">
     <link rel="stylesheet" href="../css/index-style.css">
     <link rel="stylesheet" href="../css/extrato-style.css">
-    <title>Fintech | Investimento</title>
+    <title>Fintech | Recebimento</title>
 </head>
 <body>
     <header class="container-fluid text-center py-1 d-flex">
@@ -56,7 +56,7 @@
                                 <p class="extrato-local">
                                     Restaurante
                                 </p>
-                                <p class="extrato-valor">
+                                <p class="extrato-valor recebimento">
                                     R$ 90,00
                                 </p>
                             </div>
@@ -74,7 +74,7 @@
                                 <p class="extrato-local">
                                     Restaurante
                                 </p>
-                                <p class="extrato-valor">
+                                <p class="extrato-valor recebimento">
                                     R$ 90,00
                                 </p>
                             </div>
@@ -92,7 +92,7 @@
                                 <p class="extrato-local">
                                     Restaurante
                                 </p>
-                                <p class="extrato-valor">
+                                <p class="extrato-valor recebimento">
                                     R$ 90,00
                                 </p>
                             </div>
@@ -110,7 +110,7 @@
                                 <p class="extrato-local">
                                     Restaurante
                                 </p>
-                                <p class="extrato-valor">
+                                <p class="extrato-valor recebimento">
                                     R$ 90,00
                                 </p>
                             </div>

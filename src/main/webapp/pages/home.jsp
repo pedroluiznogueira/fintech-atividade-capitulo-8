@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../css/menu-style.css">
     <link rel="stylesheet" href="../css/index-style.css">
     <link rel="stylesheet" href="../css/home-style.css">
-    <title>Fintech | Login</title>
+    <title>Fintech | Home</title>
 </head>
 <body>
     <header class="container-fluid text-center py-1 d-flex">
@@ -48,42 +48,57 @@
                             R$ 1.000.000.000,00
                         </h3>
                     </div>
-                    <div class="d-flex py-3 extrato">
-                        <button class="btn px-4 button-extrato">Extrato</button>
-                    </div>
                 </div>
                 <div class="text-black">
                     <h2 class="title-dashboard">Dashboard</h2>
                     <ul class="gallery">
                         <li class="dashboard-carrossel">
                             <div>
-                                <img src="/image/investimento-black.svg">
-                                <h3>Investimentos</h3>
+                                <img src="../image/investimento-black.svg">
+                                <h3 onclick="mostrarDiv('#dashboard-investimento')">Investimentos</h3>
                             </div>
                         </li>
                         <li class="dashboard-carrossel">
                             <div>
-                                <img src="/image/recebimento-black.svg">
-                                <h3>Recebimentos</h3>
+                                <img src="../image/recebimento-black.svg">
+                                <h3 onclick="mostrarDiv('#dashboard-recebimento')">Recebimentos</h3>
                             </div>
                         </li>
                         <li class="dashboard-carrossel">
                             <div>
-                                <img src="/image/gasto-black.svg">
-                                <h3>Gastos</h3>
+                                <img src="../image/gasto-black.svg">
+                                <h3 onclick="mostrarDiv('#dashboard-gasto')">Gastos</h3>
                             </div>
                         </li>
                     </ul>
                 </div>
                 <div class="text-black">
-                    <h4>Total de Investimentos</h4>
-                    <div class="text-black">
-                        <input type="date" class="dashboard-date">
-                        até
-                        <input type="date" class="dashboard-date">
-                    </div>
-                    <div class="dashboard">
+                    <div id="dashboard-investimento" class="mostrar">
+                        <h4 style="color: black;">Total de Investimentos</h4>
                         <!-- DASHBOARD DE CADA MENU ESCOLHIDO -->
+                        <div class="d-flex py-3 extrato">
+                            <a href="extrato-investimento.jsp">
+                                <button class="btn px-4 button-extrato">Extrato dos Investimentos</button>
+                            </a>
+                        </div>
+                    </div>
+                    <div id="dashboard-recebimento" class="mostrar">
+                        <h4 style="color: black;"style="color: black;">Total de Recebimentos</h4>
+                        <!-- DASHBOARD DE CADA MENU ESCOLHIDO -->
+                        <div class="d-flex py-3 extrato">
+                            <a href="extrato-recebimento.jsp">
+                                <button class="btn px-4 button-extrato">Extrato dos Recebimentos</button>
+                            </a>
+                        </div>
+                    </div>
+                    <div id="dashboard-gasto" class="mostrar">
+                        <h4 style="color: black;">Total de Gastos</h4>
+                        <!-- DASHBOARD DE CADA MENU ESCOLHIDO -->
+                        <div class="d-flex py-3 extrato">
+                            <a href="extrato-gasto.jsp">
+                                <button class="btn px-4 button-extrato">Extrato dos Gastos</button>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

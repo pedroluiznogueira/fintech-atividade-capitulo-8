@@ -38,8 +38,7 @@
                 </form>
             </div>
             <div class="container pt-5 login-password-create">
-                <a href="cadastro.jsp" class="float-start text-white">Criar conta</a>
-                <a href="#" class="float-end text-white">Esqueceu a senha</a>
+                <a href="cadastro.jsp" class="text-white">Criar conta</a>
             </div>
         </div>
     </main>

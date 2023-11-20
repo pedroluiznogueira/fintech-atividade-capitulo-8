@@ -40,4 +40,7 @@
         width: 100%;
         max-width: 500px;
     }
+    .login-password-create{
+        text-align: center;
+    }
 }

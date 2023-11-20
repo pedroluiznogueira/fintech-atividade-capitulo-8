@@ -50,6 +50,12 @@ body{
     font-size: 10px;
     text-decoration: underline;
 }
+.gasto{
+    color: #F21F26;
+}
+.recebimento{
+    color: #86C28B;
+}
 
 @media(min-width: 574px){
     
