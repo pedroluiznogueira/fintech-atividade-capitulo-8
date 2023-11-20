@@ -35,7 +35,8 @@ public class InvestimentoDAO {
         }
     }
 
-    public boolean insert(Investimento investimento) {
+    // @TODO: passar o id do usuario dentro do objeto da classe Investimento
+    public boolean insert(Investimento investimento, int idUsuario) {
         try {
             conexao = ConnectionManager
                     .getInstance()
@@ -48,7 +49,7 @@ public class InvestimentoDAO {
             PreparedStatement stmt = conexao.prepareStatement(sqlInsert);
 
             // Inserindo os valores nas mascaras do insert
-            stmt.setInt(1, 1); // TODO: por hora nao usando um Usuario real, dito que foi pedido para nao fazemos para a tabela de usuarios ainda
+            stmt.setInt(1, idUsuario);
             stmt.setString(2, investimento.getTipo());
             stmt.setString(3,  investimento.getDescricao());
             stmt.setDouble(4, investimento.getValorInvestido());
