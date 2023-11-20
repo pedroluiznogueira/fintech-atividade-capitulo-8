@@ -32,6 +32,10 @@ img{
     margin: 0;
 }
 
+select option{
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.60);
+}
 
 @media(min-width:768px){
     .form-center-desk{

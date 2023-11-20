@@ -16,3 +16,8 @@ header{
 body{
     background-color: #12122B;
 }
+
+.btn-cadastro{
+    background-color: #AAAA91;
+    margin-bottom: 8px;
+}
