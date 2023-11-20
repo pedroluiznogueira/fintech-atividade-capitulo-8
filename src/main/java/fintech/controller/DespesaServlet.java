@@ -15,6 +15,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet("/despesas")
 public class DespesaServlet extends HttpServlet {
@@ -61,6 +64,42 @@ public class DespesaServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         int idUsuario = HttpSessionUtils.getUsuarioIdUsingHttpSessionCpf(req, usuarioDAO);
 
+        String typeParam = req.getParameter("type");
+        if ("count".equals(typeParam)) {
+            getQuantidadeDeDespesas(resp, idUsuario);
+        } else {
+            getAllDespesas(resp, idUsuario);
+        }
+    }
+
+    private void getAllDespesas(HttpServletResponse resp, int idUsuario) throws IOException {
+        ResultSet despesasResultSet = despesaDAO.getDespesas(idUsuario);
+        List<Despesa> despesasList = new ArrayList<>();
+
+        try {
+            while (despesasResultSet.next()) {
+                Despesa despesa = new Despesa(
+                        idUsuario,
+                        despesasResultSet.getString("categoria"),
+                        despesasResultSet.getString("descricao"),
+                        despesasResultSet.getFloat("valor")
+                );
+                despesasList.add(despesa);
+            }
+
+            ObjectMapper objectMapper = new ObjectMapper();
+            String jsonString = objectMapper.writeValueAsString(despesasList);
+
+            resp.setContentType("application/json");
+            resp.getWriter().write(jsonString);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Internal Server Error");
+        }
+    }
+
+    private void getQuantidadeDeDespesas(HttpServletResponse resp, int idUsuario) throws IOException {
         ResultSet getQuantidadeDeDespesasResultSet = despesaDAO.getQuantidadeDeDespesas(idUsuario);
 
         ObjectMapper objectMapper = new ObjectMapper();
