@@ -39,7 +39,6 @@ public class LoginServlet extends HttpServlet {
         try {
             if (resultSet.next()) {
                 String senhaExistente = resultSet.getString("SENHA");
-                System.out.println("senhaExistente: " + senhaExistente);
 
                 if (senhaExistente.equals(senhaInserida)) {
                     req.setAttribute("success", true);
