@@ -3,7 +3,6 @@ package fintech.dao;
 import fintech.models.Despesa;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -61,12 +60,17 @@ public class DespesaDAO {
         }
     }
 
-    public ResultSet getAll(Connection conexao) {
+    public ResultSet getDespesas(int idUsuario) {
         ResultSet resultSet = null;
         try {
+            conexao = ConnectionManager
+                    .getInstance()
+                    .getConnection();
+
             // Preparando o select all
-            String sqlSelect = "SELECT * FROM DESPESAS";
+            String sqlSelect = "SELECT * FROM DESPESAS WHERE USUARIO_ID = ?";
             PreparedStatement stmt = conexao.prepareStatement(sqlSelect);
+            stmt.setInt(1, idUsuario);
 
             resultSet = stmt.executeQuery();
         } catch (SQLException exception) {
