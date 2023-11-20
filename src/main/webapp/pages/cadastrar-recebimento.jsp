@@ -54,7 +54,7 @@
 
             <p class="fs-1 fw-bold">Cadastro de Recebimento</p>
             <div class="form-center-desk">
-                <form action="/recebimento" name="cadastro-recebimento" id="cadastro-recebimento" method="post" class="form-width">
+                <form action="/receitas" name="cadastro-recebimento" id="cadastro-recebimento" method="post" class="form-width">
                     <select name="tipo-recebimento" class="form-number form-control my-4 form-width form-login" required style="color: rgba(0, 0, 0, 0.60);">
                         <option value="0">Tipo de Recebimento</option>
                         <option value="salario">Salário</option>

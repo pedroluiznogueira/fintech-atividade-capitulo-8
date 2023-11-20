@@ -2,8 +2,8 @@ package fintech.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import fintech.dao.RecebimentoDAO;
-import fintech.models.Recebimento;
+import fintech.dao.ReceitaDAO;
+import fintech.models.Receita;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -34,12 +34,14 @@ public class ReceitaServlet extends HttpServlet {
         String tipoRecebimento = req.getParameter("tipo-recebimento");
         String descricaoRecebimento = req.getParameter("descricao-recebimento");
         Float valorRecebimento = Float.valueOf(req.getParameter("valor-recebimento"));
+        int idUsuario = 1;
 
-        Recebimento recebimento = new Recebimento(tipoRecebimento,
+        Receita receita = new Receita(idUsuario,
+                tipoRecebimento,
                 descricaoRecebimento,
                 valorRecebimento);
 
-        boolean isCreated = recebimentoDAO.insert(recebimento);
+        boolean isCreated = receitaDAO.insert(receita);
 
         if (isCreated) {
             req.setAttribute("success", true);
@@ -47,7 +49,7 @@ public class ReceitaServlet extends HttpServlet {
             req.setAttribute("success", false);
         }
 
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/pages/cadastrar-recebimento");
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/pages/cadastrar-recebimento.jsp");
         requestDispatcher.forward(req, resp);
     }
 

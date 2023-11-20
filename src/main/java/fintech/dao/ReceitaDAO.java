@@ -32,16 +32,16 @@ public class ReceitaDAO {
         }
     }
 
-    public boolean insert(Recebimento recebimento) {
+    public boolean insert(Receita recebimento) {
         try {
             conexao = ConnectionManager
                     .getInstance()
                     .getConnection();
 
             // Preparando o insert
-            String sqlInsert = "INSERT INTO RECEITA " +
-                    "(USUARIO_ID, CATEGORIA, TIPO, VALOR)" +
-                    " VALUES (?, ?, ?, ?, ?, ?)";
+            String sqlInsert = "INSERT INTO RECEITAS" +
+                    "(USUARIO_ID, TIPO, DESCRICAO, VALOR)" +
+                    " VALUES (?, ?, ?, ?)";
             PreparedStatement stmt = conexao.prepareStatement(sqlInsert);
 
             // Inserindo os valores nas mascaras do insert

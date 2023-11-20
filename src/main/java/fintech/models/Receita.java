@@ -4,51 +4,23 @@ import fintech.BancoEmMemoria;
 import java.util.UUID;
 
 public class Receita extends Entidade {
-    private final BancoEmMemoria bancoEmMemoria;
-    private final UUID idUsuario;
+    private final int idUsuario;
     private final String tipo;
     private final String descricao;
     private final Float valor;
 
     public Receita(
-            BancoEmMemoria bancoEmMemoria,
-            UUID idUsuario,
-            String tipo,
-            String descricao,
-            Float valor
-    ) {
-        this.bancoEmMemoria = bancoEmMemoria;
-        this.idUsuario = idUsuario;
-        this.tipo = tipo;
-        this.descricao = descricao;
-        this.valor = valor;
-    }
-
-    public Receita(
-            UUID idUsuario,
-            String tipo,
-            String descricao,
-            Float valor
-    ) {
-        this.bancoEmMemoria = null;
-        this.idUsuario = idUsuario;
-        this.tipo = tipo;
-        this.descricao = descricao;
-        this.valor = valor;
-    }
-
-    public Recebimento(
+            int idUsuario,
             String tipo,
             String descricao,
             Float valor) {
-        this.bancoEmMemoria = null;
-        this.idUsuario = null;
+        this.idUsuario = idUsuario;
         this.tipo = tipo;
         this.descricao = descricao;
         this.valor = valor;
     }
 
-    public UUID getIdUsuario() {
+    public int getIdUsuario() {
         return idUsuario;
     }
 
@@ -62,21 +34,5 @@ public class Receita extends Entidade {
 
     public Float getValor() {
         return valor;
-    }
-
-    public void cadastrarReceita() {
-        bancoEmMemoria.getReceitas().add(this);
-    }
-
-    public void alterarReceita(Integer posicaoReceita, Receita receita) {
-        bancoEmMemoria.getReceitas().set(posicaoReceita, receita);
-    }
-
-    public void excluirReceita() {
-        bancoEmMemoria.getReceitas().remove(this);
-    }
-
-    public Receita consultarReceita() {
-        return this;
     }
 }
